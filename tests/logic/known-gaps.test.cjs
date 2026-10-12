@@ -2,12 +2,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { mutationApp, node, createApp, reviewMove, assertGraph } = require('../helpers/app.cjs');
 
-// Keep the original gap IDs as regression labels. Only unresolved requirements
-// execute as TODOs; test:requirements runs those strictly as well.
-const unresolved = new Set(['G3']);
-function gap(id, name, check) {
-  test(`${id}: ${name}`, { todo: unresolved.has(id) && process.env.STRICT_REQUIREMENTS !== '1' && 'Confirmed baseline gap; see docs/TESTING.md' }, check);
-}
+// Retain the original gap IDs as ordinary requirement regressions.
+function gap(id, name, check) { test(`${id}: ${name}`, check); }
 
 gap('G1a', 'editor completion records a completion timestamp', () => {
   const { app } = mutationApp(); app.openEdit('n2'); app.form.status = 'complete'; app.saveForm();

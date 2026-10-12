@@ -21,7 +21,7 @@ The pinned development dependency and `package-lock.json` make installation repr
 | `npm run test:logic` | Node's built-in runner; no npm dependencies or browser installation needed |
 | `npm run test:browser` | Real Chromium interactions, measured geometry, persistence, and memory-only flows |
 | `npm test` | Logic followed by browser checks |
-| `npm run test:requirements` | Strict execution of the known-gap assertions; currently exits with failures |
+| `npm run test:requirements` | Focused execution of the seven original gap regressions; all now pass |
 
 The app's runtime Tailwind CDN must be reachable for browser rendering checks. Tests explicitly wait for utility CSS; missing CSS is a test failure, not an accepted unstyled result. For a managed environment with an existing Chromium binary, `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` may supply its absolute executable path. Prefer the pinned browser installed by the command above for comparable results.
 
@@ -44,18 +44,18 @@ Browser screenshots, failure traces, and runner output go into ignored `test-res
 - Embedded iframe and storage-access failures: Add log updates the draft, Save applies it in memory, and Cancel discards a later edit.
 - Overview sizing, adjacent desktop drawers, mutually exclusive Notes/Log, and narrow overlays.
 
-### Known requirements gaps
+### Original requirements gaps and their fixes
 
-These are executable desired-behavior assertions in `tests/logic/known-gaps.test.cjs`, not assertions that the bugs are correct. Seven assertions originally executed as TODOs. Completion-history, dialog Undo, and owning-questline closure fixes now run as regular regressions; one TODO remains for G3. The strict command removes TODO status so the unresolved requirements cannot be mistaken for passing acceptance checks. Remove each TODO classification when its fix lands and keep the requirement assertion.
+These executable desired-behavior assertions remain in `tests/logic/known-gaps.test.cjs` with their original G1–G4 labels. All seven now run as ordinary regressions with no TODO classifications. `npm run test:requirements` runs this focused set; it now succeeds.
 
 | Gap | Assertions | Required behavior |
 | --- | --- | --- |
 | G1: editor completion history (fixed) | G1a, G1b | Completion through Save sets `completedAt`; reopening handles the applicable timestamp consistently with endpoint completion |
 | G2: parallel closure (fixed) | G2 | A parallel follow-up inherits abandonment closure from its owning questline |
-| G3: merge tip after a move | G3 | Rejoin targets the actual destination endpoint after moving an older-ID leaf after newer work |
+| G3: merge tip after a move (fixed) | G3 | Rejoin targets the actual destination endpoint after moving an older-ID leaf after newer work |
 | G4: Undo in dialogs (fixed) | Three G4 cases | Keyboard application Undo is suppressed in contact, tag, and insights dialogs |
 
-The accepted original is preserved at checkpoint `6943ce7`. G1, G2, and G4 are fixed in the current implementation; G3 remains outstanding. Full manual checks, broad graph collision coverage, touch/pan behavior, other browsers, and pixel comparisons remain outstanding.
+The accepted original is preserved at checkpoint `6943ce7`. G1–G4 are fixed in the current implementation. Full manual checks, broad graph collision coverage, touch/pan behavior, other browsers, and pixel comparisons remain outstanding.
 
 ### Initial validation results
 
@@ -75,6 +75,12 @@ On October 12, 2026, G1 and G4 were promoted to ordinary regression assertions. 
 ### Owning-questline closure correction
 
 G2 now runs as an ordinary regression assertion. Logic validation reports 77 passes with one remaining TODO (G3); all eleven Chromium scenarios pass. Added checks cover both merged and abandoned owning lines, parallel follow-ups, stale Add/Move confirmation, local parallel termination, independent nested side quests, disabled controls, and Undo restoration.
+
+### Merge anchoring correction and completed gap fixes
+
+G3 now runs as an ordinary regression assertion. Final logic validation reports 82 passes with no TODOs; all twelve Chromium scenarios pass, and the seven focused requirement regressions pass. New cases exercise moves of older-ID leaves into main and side questlines, subsequent nested rejoins and appends, independent parallel paths, ambiguous destinations, saved merge history, and Undo. The browser move/rejoin/append scenario confirms that the merge is after the moved destination card and retains its anchor, coordinate, order, and timestamp after later work is added.
+
+All four original gap areas are fixed. Markup, CSS, the existing layout/routing formulas, frozen compatibility fixtures, and accepted reference screenshots were preserved. No storage migration or architecture extraction was introduced.
 
 ## Baseline setup
 

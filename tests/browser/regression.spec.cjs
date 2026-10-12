@@ -1,6 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const baseline = require('../fixtures/baseline-v1.json');
 const legacy = require('../fixtures/legacy-owner.json');
+const { mutationApp, node } = require('../helpers/app.cjs');
 
 test.beforeEach(async ({ page }) => {
   const errors = []; page.on('pageerror', (error) => errors.push(error.message));
@@ -235,4 +236,27 @@ test('owning-line abandonment closes parallel controls and movement; nested work
   await page.getByRole('button', { name: 'Undo', exact: false }).first().click(); await settle(page);
   await expect(page.locator('[data-group="n18"] .group-header-actions')).toHaveCount(1);
   await expect(page.locator('[data-group-endpoint="n18"]')).toHaveCount(1);
+});
+
+test('a moved older-ID endpoint receives the merge after its work; later appends preserve the recorded event', async ({ page }, info) => {
+  const { app } = mutationApp();
+  delete app.nodes.n5; app.nodes.n1.children = app.nodes.n1.children.filter((id) => id !== 'n5');
+  app.nodes.n10 = node('n10', 'n2'); app.nodes.n2.children.push('n10'); app.seq = 10;
+  await load(page, JSON.parse(app.snapshot()));
+  await page.evaluate(() => Alpine.$data(document.body).openEdit('n4'));
+  await page.locator('.move-card-button').click();
+  await page.locator('#moveDestination').selectOption('line:n1');
+  await page.getByRole('button', { name: 'Review move', exact: true }).click();
+  await page.getByRole('button', { name: 'Confirm move', exact: true }).click(); await settle(page);
+  await page.locator('[data-position="n6"] [data-action="return"]').click(); await settle(page);
+  const before = await page.evaluate(() => {
+    const a = Alpine.$data(document.body), marker = document.querySelector('.quest-node[data-related^="n6 "] circle'), card = document.querySelector('[data-position="n4"]');
+    return { anchor: a.nodes.n6.mergeAfterId, mergedAt: a.nodes.n6.mergedAt, mergeOrder: a.nodes.n6.mergeOrder, mergeY: a.nodes.n6.mergeY, markerX: +marker.getAttribute('cx'), markerY: +marker.getAttribute('cy'), mainX: a.graphWidth / 2, targetBottom: parseFloat(card.style.top) + card.offsetHeight };
+  });
+  expect(before.anchor).toBe('n4'); expect(before.markerX).toBe(before.mainX); expect(before.markerY).toBeGreaterThan(before.targetBottom);
+  await page.evaluate(() => { const a = Alpine.$data(document.body); a.openAdd('n4', 'next'); a.form.title = 'Later objective'; a.saveForm(); }); await settle(page);
+  const after = await page.evaluate(() => { const a = Alpine.$data(document.body), added = Object.values(a.nodes).find((n) => n.title === 'Later objective'), card = document.querySelector(`[data-position="${added.id}"]`); return { anchor: a.nodes.n6.mergeAfterId, mergedAt: a.nodes.n6.mergedAt, mergeOrder: a.nodes.n6.mergeOrder, mergeY: a.nodes.n6.mergeY, laterTop: parseFloat(card.style.top) }; });
+  expect(after.anchor).toBe(before.anchor); expect(after.mergedAt).toBe(before.mergedAt); expect(after.mergeOrder).toBe(before.mergeOrder); expect(after.mergeY).toBe(before.mergeY);
+  expect(after.laterTop).toBeGreaterThan(before.markerY);
+  await page.getByRole('button', { name: 'Fit all', exact: true }).click(); await page.screenshot({ path: info.outputPath('moved-endpoint-merge.png') });
 });

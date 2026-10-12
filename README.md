@@ -78,7 +78,7 @@ npm run test:browser:install
 npm test
 ```
 
-`npm run test:logic` runs independently without browser dependencies. One executed TODO assertion remains for merge anchoring; completion-history, dialog Undo, and owning-questline closure checks now pass as regular regressions. `npm run test:requirements` runs those assertions strictly and currently exits unsuccessfully. See [docs/TESTING.md](docs/TESTING.md#automated-regression-checks) for details and browser prerequisites.
+`npm run test:logic` runs independently without browser dependencies. The seven assertions covering the original four gap areas now pass as regular regressions. `npm run test:requirements` runs that focused set. See [docs/TESTING.md](docs/TESTING.md#automated-regression-checks) for details and browser prerequisites.
 
 ## Suggested development order
 

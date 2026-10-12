@@ -39,7 +39,7 @@ Read `README.md` and the relevant sections of `REQUIREMENTS.md` before changing 
 
 Use `docs/TESTING.md` for affected flows. Run meaningful logic checks for structural changes and real-browser checks for rendering, sizing, scroll, and layering changes. Test both standalone persistence and embedded/memory-only editing when relevant.
 
-Do not describe logic tests as visual browser verification. If a check cannot be run, report that limitation. Use the documented commands in `docs/TESTING.md`: `npm run test:logic`, `npm run test:browser`, and the combined `npm test`. Report known TODO assertions separately from passes; `npm run test:requirements` makes those requirements strict.
+Do not describe logic tests as visual browser verification. If a check cannot be run, report that limitation. Use the documented commands in `docs/TESTING.md`: `npm run test:logic`, `npm run test:browser`, and the combined `npm test`. Report any TODO assertions separately from passes; `npm run test:requirements` runs the focused regressions for the original four gap areas.
 
 ## Local run
 

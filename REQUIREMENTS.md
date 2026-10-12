@@ -61,6 +61,7 @@ Parallel-group exceptions are specified below: header `.`/`!` actions operate on
 - Merge to the originating parent questline, including when it is a side questline, rather than routing all branches to main.
 - Draw the merge after the source questline's descendants/work. Do not suggest that the merge happened before that work.
 - Anchor the merge event to a fixed historical position on the destination. Appending later objectives must not move an earlier merge to the new endpoint.
+- Determine the destination's serial endpoint from parent/child placement, including after moving an older card after newer work. Separate parallel paths are not competing endpoints. If that destination path has multiple serial endpoints, require its placement to be resolved before rejoining.
 - Record merge time and show it in the map/history.
 - Retain merge-related references during refactoring and protected structural mutations.
 

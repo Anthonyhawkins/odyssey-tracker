@@ -10,6 +10,8 @@ The map should resemble a Git commit flow diagram with smooth branches and rejoi
 
 A rejoin goes to the branch's actual parent questline. The merge is drawn after the source branch's work and anchored to where it happened on the destination. Appending new work must not rewrite that history visually. Existing `mergeAfterId`, ordering, and timestamp fields matter during refactoring; treat them as graph history rather than disposable layout decorations.
 
+Moves can place an older-ID objective after a newer one. New merges therefore identify the destination's serial endpoint from parent/child relationships, excluding independent parallel paths, instead of taking the highest numeric ID. Ambiguous serial endpoints prevent a new rejoin rather than guessing an anchor. Existing saved merge anchors, coordinates, ordering, and timestamps are retained.
+
 ## Smooth curves and selective spacing
 
 An experiment stretched questlines vertically and introduced more collision routing to protect large groups. The user rejected it because lanes became too far apart and connections lost their flowing appearance. Smooth curves were restored, then spacing was corrected with selective horizontal lane clearance around vertically overlapping groups.

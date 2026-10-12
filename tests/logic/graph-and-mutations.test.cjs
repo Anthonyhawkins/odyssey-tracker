@@ -212,3 +212,39 @@ test('abandoning owning line is undoable, and a reviewed parallel move rechecks 
   reviewMove(app, 'n28', 'line:n1'); app.nodes.n18.abandoned = true; app.confirmMove();
   assert.equal(app.nodes.n28.parent, 'n25'); assert.equal(app.moveDialog.review, false); assert.match(app.moveError, /closed/);
 });
+
+test('merge destination follows topology on a side quest after an older leaf is moved there', () => {
+  const { app } = mutationApp(); app.nodes.n10 = node('n10', 'n6'); app.nodes.n6.children.push('n10'); app.seq = 10;
+  reviewMove(app, 'n4', 'line:n6'); app.confirmMove();
+  const nested = add(app, 'n10', 'side'), before = app.snapshot();
+  app.returnToMain(nested);
+  assert.equal(app.nodes[nested].mergeAfterId, 'n4'); assert.equal(app.nodes[nested].returned, true); assertGraph(app);
+  const merge = plain(app.nodes[nested]); add(app, 'n4');
+  assert.deepEqual(plain(app.nodes[nested]), merge);
+  app.undo(); app.undo(); assert.equal(app.snapshot(), before); assertGraph(app);
+});
+
+test('parallel follow-ups do not compete with the owning questline endpoint when rejoining', () => {
+  const { app } = createApp(); app.loadDemo(); const side = add(app, 'n16', 'side');
+  add(app, 'n24', 'next');
+  app.returnToMain(side); assert.equal(app.nodes[side].mergeAfterId, 'n16'); assertGraph(app);
+  // A nested side quest originating in a parallel path rejoins that path.
+  const nested = add(app, 'n28', 'side'), tip = add(app, 'n28');
+  app.returnToMain(nested); assert.equal(app.nodes[nested].mergeAfterId, tip); assertGraph(app);
+});
+
+test('rejoin rejects an ambiguous parent endpoint without changing completion, history or sequence', () => {
+  const { app } = mutationApp();
+  app.nodes.n7 = node('n7', 'n1'); app.nodes.n1.children.push('n7'); app.seq = 7;
+  const before = app.snapshot(); app.returnToMain('n6');
+  assert.equal(app.snapshot(), before); assert.match(app.notice, /no single endpoint/); assertGraph(app);
+});
+
+test('loading and unrelated edits retain saved merge anchors, orders, coordinates and timestamps', () => {
+  const saved = fixture('baseline-v1.json'); saved.nodes.n7.mergeY = 1880;
+  const { app } = createApp({ snapshot: saved }), history = plain(app.nodes.n7);
+  app.openEdit('n19'); app.form.notes += '\nMore context'; app.saveForm();
+  assert.deepEqual(plain(app.nodes.n7), history);
+  const restored = createApp({ snapshot: JSON.parse(app.snapshot()) }).app;
+  assert.deepEqual(plain(restored.nodes.n7), history); assertGraph(restored);
+});
