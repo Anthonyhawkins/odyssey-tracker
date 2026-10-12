@@ -82,6 +82,10 @@ G3 now runs as an ordinary regression assertion. Final logic validation reports 
 
 All four original gap areas are fixed. Markup, CSS, the existing layout/routing formulas, frozen compatibility fixtures, and accepted reference screenshots were preserved. No storage migration or architecture extraction was introduced.
 
+### Dependency redraw during deletion
+
+End-to-end compatibility validation reproduced a group-scroll event between deleting a card and the next render. The prior measured position map still included the removed card, causing `drawBlockingLinks()` to read its missing `blockedBy` field. The renderer now ignores positions whose cards no longer exist. A deterministic Chromium regression fires that scroll before rerender and verifies that the remaining saved dependency still draws without an uncaught error.
+
 ## Baseline setup
 
 Completed baseline capture on October 12, 2026 against unchanged prototype commit `6943ce7`. See [browser references and observations](screenshots/README.md). These checked setup items record work performed, not a pass for the full regression checklist below.

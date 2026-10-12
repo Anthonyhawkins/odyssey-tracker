@@ -260,3 +260,16 @@ test('a moved older-ID endpoint receives the merge after its work; later appends
   expect(after.laterTop).toBeGreaterThan(before.markerY);
   await page.getByRole('button', { name: 'Fit all', exact: true }).click(); await page.screenshot({ path: info.outputPath('moved-endpoint-merge.png') });
 });
+
+test('a group scroll between deletion and rerender ignores removed positions and preserves remaining dependencies', async ({ page }) => {
+  await load(page);
+  await page.evaluate(() => {
+    const a = Alpine.$data(document.body); a.requestDelete('n24'); a.confirmDelete();
+    // Scroll listeners can fire while the previous measured position map is
+    // still installed and the next animation frame has not rendered deletion.
+    document.querySelector('[data-group-scroll="n4"]').dispatchEvent(new Event('scroll'));
+  });
+  await settle(page); await expect(page.locator('[data-card]')).toHaveCount(25);
+  await expect(page.locator('.dependency-links path')).toHaveCount(1);
+  expect(await page.evaluate(() => Alpine.$data(document.body).nodes.n12.blockedBy)).toBe('n10');
+});
