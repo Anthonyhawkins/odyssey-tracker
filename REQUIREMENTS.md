@@ -25,6 +25,7 @@ The product must expose the additional work and inefficiency involved in enterpr
 - Show explanatory sidebar definitions for main quest, side quest, objective, completion, abandonment, and parallel objectives.
 - Allow the overview/metrics to collapse so the map has more space.
 - Let the map fill the remaining viewport space and retain zoom, pan, center, and fit controls.
+- Offer a Background selector: `dotted-grid` (default), `none`, or `backdrop` using the bundled `map.png`. The backdrop covers the viewport without repeating; background changes do not alter graph geometry or project data. Remember the application preference in `config.yaml` for Go mode, browser storage for static mode, and session memory for embedded previews.
 - Do not restore the removed redundant “Quest tree / Independent lanes” legend row above the controls.
 - Ask before replacing the current project or loading the example. Support Undo for replacement within an active file. In Go mode, New project creates a separate file; switching files starts a separate session Undo history.
 - Show total work, side-quest share, completion, and manually estimated cumulative delay. Do not present cumulative estimates as a schedule forecast or critical path.

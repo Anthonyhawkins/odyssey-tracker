@@ -25,7 +25,7 @@ Browser reference screenshots are available in [docs/screenshots/](docs/screensh
 
 | Area | Implemented behavior |
 | --- | --- |
-| Quest map | Central thicker mainline, independent side and nested questlines, smooth SVG connections, parent-branch merges, lane reuse, zoom/pan/center/fit, relationship focus |
+| Quest map | Central thicker mainline, independent side and nested questlines, smooth SVG connections, parent-branch merges, lane reuse, zoom/pan/center/fit, relationship focus; Dotted grid, None, or Backdrop background |
 | Objectives | Serial objectives and parallel groups on main or side questlines; balanced grids with at most three rows; Normal, Compact, and Very compact display modes |
 | Lifecycle | In progress, Undefined, Complete; dependency-derived blocked display; abandonment with reason and date; merge history with date and time |
 | Card details | Title, description, category icon, delay estimate, links, multiple owners, colored tags, timestamps, plain-text notes, timestamped progress log |
@@ -51,7 +51,7 @@ The static prototype remains usable with `python3 -m http.server 8000` and `http
 
 ## Technical architecture
 
-- Go serves a loopback HTTP application and embeds `index.html` and `assets/` into the executable with `go:embed`.
+- Go serves a loopback HTTP application and embeds `index.html`, `map.png`, and `assets/` into the executable with `go:embed`.
 - `config.go` manages YAML settings; `project.go` validates saved graphs; `server.go` provides the project-file API and embedded assets; `main.go` starts and stops the server.
 - The accepted HTML retains markup, CSS, graph/editor logic, embedded Alpine.js, and category SVG icons. A small `assets/local-app.js` adapter adds welcome, project selection, and queued file persistence.
 - Tailwind's pinned 3.4.17 browser runtime is bundled locally. Styling requires no CDN at runtime; license notices are included in the assets.

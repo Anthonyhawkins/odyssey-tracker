@@ -53,3 +53,7 @@ The requested binary uses a loopback server and browser UI, with per-user data a
 The project filename identifies the file independently of later title edits. Same-title creation produces another filename instead of replacing data. Configuration stores application settings and last selection; each JSON stores the existing project/node/sequence snapshot. Exports retain their earlier shape, and opening compatible exports derives a safe sequence.
 
 Live edits remain authoritative while serialized saves run in the background. Atomic replacement protects the previous file from interrupted writes; revision checks refuse stale saves. A visible failure offers Retry, Export, and confirmed Reopen. Switching waits for writes and refuses an open editor or unresolved save failure. Undo applies within the current project's session; switching or creating a separate project starts fresh history. Whole-file deletion is explicitly confirmed and cannot be undone.
+
+## Optional map background
+
+The accepted dotted grid remains the default. A toolbar selector also offers a plain background or the user-provided `map.png` backdrop. The backdrop is centered and covers the viewport with no repetition; it does not participate in graph coordinates, card sizing, zoom, or hit testing. Go embeds the original image so copied binaries work offline. This is an application preference in configuration (or browser/session storage for the prototype), leaving project snapshots, exports, and Undo unchanged.

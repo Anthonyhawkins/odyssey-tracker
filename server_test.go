@@ -290,3 +290,51 @@ func TestUserTextCannotEndBootstrapScript(t *testing.T) {
 		t.Fatal("bootstrap contains unescaped user markup")
 	}
 }
+
+func TestBackgroundSettingKeepsLegacyConfigAndProjectDataCompatible(t *testing.T) {
+	dir := t.TempDir()
+	// Configs created before this preference existed retain the original grid.
+	legacy := []byte("listen: 127.0.0.1:8042\nprojects_dir: projects\nlast_project: \"\"\nwelcome_seen: true\n")
+	if err := os.WriteFile(filepath.Join(dir, "config.yaml"), legacy, 0600); err != nil {
+		t.Fatal(err)
+	}
+	s, err := newAppServer(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s.bootstrap()["background"] != "dotted-grid" {
+		t.Fatal("legacy config lost default grid")
+	}
+	project := decodeResponse(t, request(s, "POST", "/api/projects", fixtureDocument(t, "baseline-v1.json"), ""), 201)
+	name := filepath.Join(s.projectsDir, project.File)
+	before, err := os.ReadFile(name)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, value := range []string{"none", "backdrop", "dotted-grid"} {
+		w := request(s, "POST", "/api/background", []byte(`{"background":"`+value+`"}`), "")
+		if w.Code != 200 {
+			t.Fatal(w.Body)
+		}
+		restarted, err := newAppServer(dir)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if restarted.bootstrap()["background"] != value || restarted.config.LastProject != project.File || !restarted.config.WelcomeSeen {
+			t.Fatal("setting did not survive restart or changed other settings")
+		}
+	}
+	for _, body := range []string{`{"background":"unknown"}`, `{"background":"backdrop"} {}`, `{}`} {
+		if w := request(s, "POST", "/api/background", []byte(body), ""); w.Code != 400 {
+			t.Fatal("invalid preference accepted", w.Body)
+		}
+	}
+	after, _ := os.ReadFile(name)
+	if !bytes.Equal(before, after) {
+		t.Fatal("appearance preference altered project JSON")
+	}
+	w := request(s, "GET", "/map.png", nil, "")
+	if w.Code != 200 || w.Header().Get("Content-Type") != "image/png" || !bytes.HasPrefix(w.Body.Bytes(), []byte("\x89PNG\r\n\x1a\n")) {
+		t.Fatal("embedded map missing")
+	}
+}

@@ -19,7 +19,7 @@ import (
 	"sync"
 )
 
-//go:embed index.html assets/*
+//go:embed index.html map.png assets/*
 var webAssets embed.FS
 
 type appServer struct {
@@ -122,7 +122,7 @@ func (s *appServer) remember(file string) error {
 	return nil
 }
 func (s *appServer) bootstrap() map[string]any {
-	result := map[string]any{"token": s.token, "welcome": !s.config.WelcomeSeen, "projects": []projectEntry{}, "current": nil, "dataDir": s.dataDir}
+	result := map[string]any{"token": s.token, "welcome": !s.config.WelcomeSeen, "background": s.config.Background, "projects": []projectEntry{}, "current": nil, "dataDir": s.dataDir}
 	entries, err := s.entries()
 	if err == nil {
 		result["projects"] = entries
@@ -180,6 +180,35 @@ func (s *appServer) handler() http.Handler {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.Header().Set("Cache-Control", "no-store")
 		_, _ = w.Write(b)
+	})
+	mux.HandleFunc("GET /map.png", func(w http.ResponseWriter, r *http.Request) {
+		b, _ := webAssets.ReadFile("map.png")
+		w.Header().Set("Content-Type", "image/png")
+		_, _ = w.Write(b)
+	})
+	mux.HandleFunc("POST /api/background", func(w http.ResponseWriter, r *http.Request) {
+		var setting struct {
+			Background string `json:"background"`
+		}
+		decoder := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1024))
+		if err := decoder.Decode(&setting); err != nil {
+			problem(w, 400, err)
+			return
+		}
+		if err := decoder.Decode(new(any)); err != io.EOF || !validBackground(setting.Background) {
+			problem(w, 400, fmt.Errorf("background must be dotted-grid, none, or backdrop"))
+			return
+		}
+		s.mu.Lock()
+		defer s.mu.Unlock()
+		c := s.config
+		c.Background = setting.Background
+		if err := writeConfig(s.dataDir, c); err != nil {
+			problem(w, 500, err)
+			return
+		}
+		s.config = c
+		sendJSON(w, 200, map[string]string{"background": c.Background})
 	})
 	assets, _ := fs.Sub(webAssets, "assets")
 	mux.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(assets))))

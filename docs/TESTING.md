@@ -15,11 +15,11 @@ npm run build:local
 npm run test:local
 ```
 
-Go checks cover configuration, file CRUD, revision conflicts, concurrent saves, malformed graphs, compatible exports, legacy fields, traversal/symlink rejection, session/host checks, script escaping, and atomic-write failure preservation. Five real-browser checks cover offline welcome and project CRUD, stale-save export, failure recovery with live edits, a copied binary running outside the repository and restoring its last project after process restart, and rapid structural/content saves followed by Undo.
+Go checks cover configuration, file CRUD, revision conflicts, concurrent saves, malformed graphs, compatible exports, legacy fields, traversal/symlink rejection, session/host checks, script escaping, and atomic-write failure preservation. The local real-browser checks cover offline welcome and project CRUD, stale-save export, failure recovery with live edits, a copied binary running outside the repository and restoring its last project after process restart, rapid structural/content saves followed by Undo, and config-backed backdrop persistence without changes to project data or Undo.
 
 The local suite uses port 8766 and temporary data folders; it never opens the user's application folder. Its artifacts go to ignored `test-results-local/`. Build again after frontend changes because assets are embedded at compile time. Cross-compilation verifies compilation only; Windows and Linux binaries still require tests on those operating systems.
 
-The Go transition passed the race-enabled Go suite and vet, all five local browser scenarios, the original 82 logic and 19 browser checks, and all 20 appearance comparisons in the original Chromium 140 environment. Coverage is limited to these scenarios.
+The initial Go transition passed the race-enabled Go suite and vet, all five local browser scenarios, the original 82 logic and 19 browser checks, and all 20 appearance comparisons in the original Chromium 140 environment. Coverage is limited to these scenarios.
 
 ## Automated regression checks
 
@@ -44,6 +44,10 @@ The pinned development dependency and `package-lock.json` make installation repr
 Tailwind is bundled locally; browser rendering checks require no CDN. Tests explicitly wait for utility CSS; missing CSS is a test failure, not an accepted unstyled result. For a managed environment with an existing Chromium binary, `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` may supply its absolute executable path. Prefer the pinned browser installed by the command above for comparable results.
 
 Browser screenshots, failure traces, and runner output go into ignored `test-results/`. Reference screenshots under `docs/screenshots/` are never automatically overwritten. The default suite asserts interaction and geometry invariants. The separate visual suite compares reference images with a perceptual color threshold of `0.2` and allows zero differing pixels above that threshold; it also requires exact recorded geometry. See [compatibility and appearance validation](COMPATIBILITY-VALIDATION.md) for the browser-version requirement, timestamp normalization, results, and limitations.
+
+### Background selector validation
+
+The background change passed all 82 logic checks, the 19 existing browser scenarios, four focused background scenarios at 1600px/390px in static and embedded modes, all six local-app browser scenarios, Go race checks, and vet. Real Chromium screenshots of the backdrop were inspected at desktop and narrow widths. Checks compare graph paths, geometry, snapshots, Undo, and saved file revisions before/after background changes, and load the actual PNG. The original pixel-reference suite was not rerun for this change because the requested toolbar control intentionally changes those screenshots; reference files were left untouched.
 
 ### Logic coverage
 
@@ -130,6 +134,7 @@ Completed baseline capture on October 12, 2026 against unchanged prototype commi
 - [ ] Add a large group near other lanes: no cards/lanes cover it; unrelated lanes do not spread excessively.
 - [ ] Curves remain smooth at zoom levels and across lane reuse/merges.
 - [ ] Pan, zoom, center, fit, and relationship focus work; map fills available height.
+- [ ] Background choices show the original dotted grid, a plain canvas, or the bundled map backdrop without moving cards/paths. Check pan/zoom/fit in backdrop mode, reload persistence in Go/static mode, and embedded session editing. Old configs default to the grid; changing the preference leaves project data and Undo intact.
 
 ## Groups
 

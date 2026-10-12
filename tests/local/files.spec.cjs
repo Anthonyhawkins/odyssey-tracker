@@ -136,3 +136,18 @@ test('rapid structural and content saves followed by Undo persist the latest pla
   await page.reload();
   expect(await page.evaluate(() => JSON.parse(Alpine.$data(document.body).snapshot()))).toEqual(expected.live);
 });
+
+test('background preference uses config and leaves project data and Undo unchanged', async ({ page }, info) => {
+  await page.goto('/');
+  await page.evaluate(async () => { const a = Alpine.$data(document.body); if (a.welcome) { await a.api('welcome', { method: 'POST' }); a.welcome = false; } });
+  await page.getByRole('button', { name: 'Start new quest', exact: false }).click(); await create(page, 'Backdrop preference project');
+  const before = await page.evaluate(async () => { const a = Alpine.$data(document.body); return { disk: await a.api('projects/' + a.currentFile), undo: a.undoStack.length }; });
+  const selected = page.waitForResponse(response => response.url().endsWith('/api/background') && response.request().method() === 'POST');
+  await page.getByLabel('Background', { exact: true }).selectOption('backdrop'); expect((await selected).status()).toBe(200);
+  await expect(page.locator('.graph-viewport')).toHaveCSS('background-image', /map\.png/);
+  await page.evaluate(() => new Promise((resolve, reject) => { const image = new Image(); image.onload = resolve; image.onerror = reject; image.src = 'map.png'; }));
+  await page.screenshot({ path: info.outputPath('local-backdrop.png') });
+  const after = await page.evaluate(async () => { const a = Alpine.$data(document.body); return { disk: await a.api('projects/' + a.currentFile), undo: a.undoStack.length }; });
+  expect(after).toEqual(before);
+  await page.reload(); await expect(page.getByLabel('Background', { exact: true })).toHaveValue('backdrop');
+});

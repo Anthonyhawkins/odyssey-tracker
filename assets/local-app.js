@@ -7,11 +7,12 @@
     const boot = window.odysseyBootstrap;
     if (!boot || window.self !== window.top) return app;
     const original = { init: app.init, persist: app.persist, saveForm: app.saveForm, newProject: app.newProject, undoKey: app.undoKey };
+    let backgroundQueue = Promise.resolve();
     let queue = Promise.resolve(), pending = 0, savingNewProject = false;
     let document = { file: boot.current?.file || null, revision: boot.current?.revision || '', failed: false };
 
     Object.assign(app, {
-      localMode: true, welcome: boot.welcome, projectFiles: boot.projects, dataFolder: boot.dataDir || '',
+      localMode: true, background: boot.background || 'dotted-grid', welcome: boot.welcome, projectFiles: boot.projects, dataFolder: boot.dataDir || '',
       async api(path, options = {}) {
         const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 10_000);
         try {
@@ -24,6 +25,12 @@
         this.currentFile = document.file; this.memoryOnly = true; original.init.call(this); this.memoryOnly = false;
         if (boot.warning) this.notify(boot.warning);
         window.addEventListener('beforeunload', (event) => { if (pending || this.diskError || this.modal) { event.preventDefault(); event.returnValue = ''; } });
+      },
+      setBackground(value) {
+        if (!['dotted-grid', 'none', 'backdrop'].includes(value)) return;
+        this.background = value;
+        backgroundQueue = backgroundQueue.then(() => this.api('background', { method: 'POST', body: JSON.stringify({ background: value }) }))
+          .catch((error) => this.notify('Background changed for this session; preference could not be saved: ' + error.message));
       },
       queueSave(snapshot) {
         const target = document;

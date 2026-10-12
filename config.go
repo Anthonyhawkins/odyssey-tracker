@@ -11,6 +11,7 @@ import (
 )
 
 type Config struct {
+	Background  string `yaml:"background" json:"background"`
 	Listen      string `yaml:"listen" json:"listen"`
 	ProjectsDir string `yaml:"projects_dir" json:"projectsDir"`
 	LastProject string `yaml:"last_project" json:"lastProject"`
@@ -18,7 +19,7 @@ type Config struct {
 }
 
 func loadConfig(dir string) (Config, error) {
-	c := Config{Listen: "127.0.0.1:8042", ProjectsDir: "projects"}
+	c := Config{Listen: "127.0.0.1:8042", ProjectsDir: "projects", Background: "dotted-grid"}
 	b, err := os.ReadFile(filepath.Join(dir, "config.yaml"))
 	if os.IsNotExist(err) {
 		return c, writeConfig(dir, c)
@@ -41,7 +42,14 @@ func loadConfig(dir string) (Config, error) {
 	if c.LastProject != "" && !validFilename(c.LastProject) {
 		return c, fmt.Errorf("last_project must be a project JSON filename")
 	}
+	if !validBackground(c.Background) {
+		return c, fmt.Errorf("background must be dotted-grid, none, or backdrop")
+	}
 	return c, nil
+}
+
+func validBackground(value string) bool {
+	return value == "dotted-grid" || value == "none" || value == "backdrop"
 }
 
 func writeConfig(dir string, c Config) error {

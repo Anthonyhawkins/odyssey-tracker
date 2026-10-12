@@ -28,7 +28,10 @@ listen: 127.0.0.1:8042
 projects_dir: projects
 last_project: ""
 welcome_seen: false
+background: dotted-grid
 ```
+
+**Background** in the map toolbar offers **Dotted grid**, **None**, and **Backdrop**. Backdrop uses the embedded `map.png`, centered and scaled to cover the viewport. The application remembers this choice as `background: dotted-grid | none | backdrop` in configuration, separately from project JSON and Undo. Older configs without this field default to the dotted grid.
 
 `projects_dir` is relative to the application folder or an absolute path. The app maintains `last_project` and `welcome_seen`. Stop the app before editing configuration. Invalid settings fail startup without replacing the config. The server only accepts loopback addresses.
 
