@@ -1,0 +1,14 @@
+{
+  "name": "odysseus-tracker",
+  "private": true,
+  "version": "0.0.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "npm run test:logic && npm run test:browser",
+    "test:logic": "node --test tests/logic/*.test.cjs",
+    "test:requirements": "node tests/run-requirements.cjs",
+    "test:browser": "playwright test",
+    "test:browser:install": "playwright install chromium"
+  },
+  "devDependencies": { "@playwright/test": "1.58.2" }
+}

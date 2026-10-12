@@ -1,0 +1,715 @@
+{
+  "project": {
+    "title": "Launch enterprise developer portal",
+    "goal": "Deliver a portal with SSO, cloud hosting, security approval and production monitoring. Objective groups organize both mainline and side quest work; nested branches reveal the work behind delivery.",
+    "owner": "Platform Engineering",
+    "root": "n1",
+    "created": "2026-10-05T13:00:00.000Z",
+    "tags": [
+      {
+        "id": "t1",
+        "name": "Release",
+        "color": "#3b82f6"
+      },
+      {
+        "id": "t2",
+        "name": "Environment",
+        "color": "#8b5cf6"
+      },
+      {
+        "id": "t3",
+        "name": "Urgent",
+        "color": "#ef4444"
+      }
+    ],
+    "tagSeq": 3,
+    "contacts": [
+      {
+        "id": "p1",
+        "name": "Platform Engineering",
+        "email": ""
+      },
+      {
+        "id": "p2",
+        "name": "Infrastructure Ops",
+        "email": ""
+      },
+      {
+        "id": "p3",
+        "name": "Architecture Board",
+        "email": ""
+      },
+      {
+        "id": "p4",
+        "name": "Architecture Team",
+        "email": ""
+      },
+      {
+        "id": "p5",
+        "name": "AppSec",
+        "email": ""
+      },
+      {
+        "id": "p6",
+        "name": "Release Engineering",
+        "email": ""
+      },
+      {
+        "id": "p7",
+        "name": "Identity Team",
+        "email": ""
+      },
+      {
+        "id": "p8",
+        "name": "Product & QA",
+        "email": ""
+      },
+      {
+        "id": "p9",
+        "name": "Observability Team",
+        "email": ""
+      },
+      {
+        "id": "p10",
+        "name": "SRE",
+        "email": ""
+      },
+      {
+        "id": "p11",
+        "name": "Platform Ops",
+        "email": ""
+      },
+      {
+        "id": "p12",
+        "name": "Frontend Team",
+        "email": ""
+      },
+      {
+        "id": "p13",
+        "name": "Frontend & QA",
+        "email": ""
+      },
+      {
+        "id": "p14",
+        "name": "Developer Experience",
+        "email": ""
+      },
+      {
+        "id": "p15",
+        "name": "Compliance",
+        "email": ""
+      },
+      {
+        "id": "p16",
+        "name": "Alex Morgan",
+        "email": "alex.morgan@example.com"
+      },
+      {
+        "id": "p17",
+        "name": "Sam Rivera",
+        "email": "sam.rivera@example.com"
+      }
+    ],
+    "contactSeq": 17
+  },
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "title": "Launch enterprise developer portal",
+      "category": "Main Quest",
+      "description": "Deliver a portal with SSO, cloud hosting, security approval and production monitoring. Objective groups organize both mainline and side quest work; nested branches reveal the work behind delivery.",
+      "parent": null,
+      "isSide": false,
+      "status": "complete",
+      "owner": "Platform Engineering",
+      "days": 0,
+      "color": "#3b82f6",
+      "children": [
+        "n2"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-05T17:00:00.000Z",
+      "updated": "2026-10-05T21:00:00.000Z",
+      "completedAt": "2026-10-05T21:00:00.000Z",
+      "ownerIds": [
+        "p1"
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "title": "Build the portal MVP",
+      "category": "Development",
+      "description": "Create service catalog and validate the first user journey.",
+      "parent": "n1",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Platform Engineering",
+      "days": 0,
+      "children": [
+        "n3",
+        "n4",
+        "n20",
+        "n22"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-05T21:00:00.000Z",
+      "updated": "2026-10-06T01:00:00.000Z",
+      "completedAt": "2026-10-06T01:00:00.000Z",
+      "ownerIds": [
+        "p1"
+      ]
+    },
+    "n3": {
+      "id": "n3",
+      "title": "Provision cloud hosting",
+      "category": "Infrastructure",
+      "description": "Request environments without stopping portal development.",
+      "parent": "n2",
+      "isSide": true,
+      "status": "complete",
+      "owner": "Infrastructure Ops",
+      "days": 8,
+      "color": "#8b5cf6",
+      "children": [
+        "n5",
+        "n6"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-06T01:00:00.000Z",
+      "updated": "2026-10-06T05:00:00.000Z",
+      "completedAt": "2026-10-06T05:00:00.000Z",
+      "ownerIds": [
+        "p2"
+      ]
+    },
+    "n4": {
+      "id": "n4",
+      "title": "Implement enterprise SSO",
+      "category": "Development",
+      "description": "Integrate identity provider and role mapping.",
+      "parent": "n2",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Platform Engineering",
+      "days": 0,
+      "children": [
+        "n8"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-06T05:00:00.000Z",
+      "updated": "2026-10-06T09:00:00.000Z",
+      "completedAt": "2026-10-06T09:00:00.000Z",
+      "ownerIds": [
+        "p1"
+      ]
+    },
+    "n5": {
+      "id": "n5",
+      "title": "Obtain architecture approval",
+      "category": "Approval Board",
+      "description": "Nested review needed to approve the hosting design.",
+      "parent": "n3",
+      "isSide": true,
+      "status": "complete",
+      "owner": "Architecture Board",
+      "days": 4,
+      "color": "#f97316",
+      "children": [
+        "n7"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-06T09:00:00.000Z",
+      "updated": "2026-10-06T13:00:00.000Z",
+      "completedAt": "2026-10-06T13:00:00.000Z",
+      "ownerIds": [
+        "p3"
+      ]
+    },
+    "n6": {
+      "id": "n6",
+      "title": "Configure VM and networking",
+      "category": "Work Order / Ticket",
+      "description": "Continue the infrastructure branch after the design review.",
+      "parent": "n3",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Infrastructure Ops",
+      "days": 3,
+      "children": [],
+      "done": true,
+      "returned": true,
+      "created": "2026-10-06T13:00:00.000Z",
+      "updated": "2026-10-06T17:00:00.000Z",
+      "completedAt": "2026-10-06T17:00:00.000Z",
+      "mergeOrder": 11,
+      "mergeAfterId": "n8",
+      "mergedAt": "2026-10-07T09:00:00.000Z",
+      "ownerIds": [
+        "p2"
+      ]
+    },
+    "n7": {
+      "id": "n7",
+      "title": "Document approved data flows",
+      "category": "Architecture Review",
+      "description": "Final objective in the architecture branch, then rejoin infrastructure.",
+      "parent": "n5",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Architecture Team",
+      "days": 2,
+      "children": [],
+      "done": true,
+      "returned": true,
+      "created": "2026-10-06T17:00:00.000Z",
+      "updated": "2026-10-06T21:00:00.000Z",
+      "completedAt": "2026-10-06T21:00:00.000Z",
+      "mergeOrder": 9,
+      "mergeAfterId": "n6",
+      "mergedAt": "2026-10-07T01:00:00.000Z",
+      "ownerIds": [
+        "p4"
+      ]
+    },
+    "n8": {
+      "id": "n8",
+      "title": "Connect the catalog API",
+      "category": "Development",
+      "description": "Keep mainline delivery moving while reviews run in parallel.",
+      "parent": "n4",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Platform Engineering",
+      "days": 0,
+      "children": [
+        "n10",
+        "n12",
+        "n14"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-06T21:00:00.000Z",
+      "updated": "2026-10-07T01:00:00.000Z",
+      "completedAt": "2026-10-07T01:00:00.000Z",
+      "ownerIds": [
+        "p1"
+      ]
+    },
+    "n10": {
+      "id": "n10",
+      "title": "Complete security assessment",
+      "category": "Security Review",
+      "description": "Review access controls, secrets and sensitive data handling.",
+      "parent": "n8",
+      "isSide": true,
+      "status": "inprogress",
+      "owner": "AppSec",
+      "days": 6,
+      "color": "#ef4444",
+      "children": [
+        "n13"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-07T05:00:00.000Z",
+      "ownerIds": [
+        "p5"
+      ]
+    },
+    "n12": {
+      "id": "n12",
+      "title": "Deploy staging environment",
+      "category": "Deployment",
+      "description": "Staging deployment is explicitly blocked by security assessment.",
+      "parent": "n8",
+      "isSide": false,
+      "status": "inprogress",
+      "owner": "Release Engineering",
+      "days": 2,
+      "children": [
+        "n16",
+        "n19"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-07T13:00:00.000Z",
+      "links": [
+        {
+          "label": "Deployment checklist (example)",
+          "url": "https://example.com/deployment-checklist"
+        },
+        {
+          "label": "Release ticket (example)",
+          "url": "https://example.com/tickets/portal-release"
+        }
+      ],
+      "blockedBy": "n10",
+      "ownerIds": [
+        "p6"
+      ],
+      "tagIds": [
+        "t1"
+      ]
+    },
+    "n13": {
+      "id": "n13",
+      "title": "Define penetration-test scope",
+      "category": "Testing",
+      "description": "Scope and ownership are still undefined.",
+      "parent": "n10",
+      "isSide": false,
+      "status": "undefined",
+      "owner": "AppSec",
+      "days": 3,
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-07T17:00:00.000Z",
+      "ownerIds": [
+        "p5"
+      ]
+    },
+    "n14": {
+      "id": "n14",
+      "title": "Confirm identity team handoff",
+      "category": "Meeting",
+      "description": "Parallel coordination branch with a completed rejoin.",
+      "parent": "n8",
+      "isSide": true,
+      "status": "complete",
+      "owner": "Identity Team",
+      "days": 1,
+      "color": "#14b8a6",
+      "children": [],
+      "done": true,
+      "returned": true,
+      "created": "2026-10-07T21:00:00.000Z",
+      "updated": "2026-10-08T01:00:00.000Z",
+      "completedAt": "2026-10-08T01:00:00.000Z",
+      "mergeOrder": 15,
+      "mergeAfterId": "n12",
+      "mergedAt": "2026-10-08T01:00:00.000Z",
+      "ownerIds": [
+        "p7"
+      ]
+    },
+    "n16": {
+      "id": "n16",
+      "title": "Define production acceptance criteria",
+      "category": "Testing",
+      "description": "An undefined mainline objective after earlier merges.",
+      "parent": "n12",
+      "isSide": false,
+      "status": "undefined",
+      "owner": "Product & QA",
+      "days": 2,
+      "children": [
+        "n17"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-08T05:00:00.000Z",
+      "ownerIds": [
+        "p8"
+      ]
+    },
+    "n17": {
+      "id": "n17",
+      "title": "Arrange observability integration",
+      "category": "Feature Exchange",
+      "description": "A later branch can reuse space freed by completed branches.",
+      "parent": "n16",
+      "isSide": true,
+      "status": "inprogress",
+      "owner": "Observability Team",
+      "days": 3,
+      "color": "#ec4899",
+      "children": [
+        "n18",
+        "n25",
+        "n26",
+        "n27"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-08T09:00:00.000Z",
+      "ownerIds": [
+        "p9"
+      ]
+    },
+    "n18": {
+      "id": "n18",
+      "title": "Register metrics and alerts",
+      "category": "External Process",
+      "description": "Continue in the same observability branch.",
+      "parent": "n17",
+      "isSide": false,
+      "status": "inprogress",
+      "owner": "SRE",
+      "days": 2,
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-08T13:00:00.000Z",
+      "ownerIds": [
+        "p10"
+      ]
+    },
+    "n19": {
+      "id": "n19",
+      "title": "Repair broken staging environment",
+      "category": "Unexpected Issue",
+      "description": "Unexpected TLS and DNS errors prevent staging smoke tests. Diagnose routing, fix certificates and validate the environment.",
+      "parent": "n12",
+      "isSide": true,
+      "status": "inprogress",
+      "owner": "Alex Morgan, Sam Rivera",
+      "days": 2,
+      "color": "#f97316",
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-08T17:00:00.000Z",
+      "links": [
+        {
+          "label": "Incident ticket (example)",
+          "url": "https://example.com/tickets/staging-tls"
+        }
+      ],
+      "ownerIds": [
+        "p16",
+        "p17"
+      ],
+      "tagIds": [
+        "t2",
+        "t3"
+      ],
+      "notes": "Staging TLS investigation\n\nObserved intermittent certificate validation failures after the environment refresh.\n\nNext steps:\n- Compare trust stores between staging and production.\n- Confirm the intermediate certificate chain.\n- Record the fix and hand off to the deployment owners.",
+      "log": [
+        {
+          "id": "demo-log-1",
+          "timestamp": "2026-10-08T17:00:00.000Z",
+          "createdAt": "2026-10-08T17:00:00.000Z",
+          "text": "Investigating staging certificate validation failures. Captured the failing certificate chain."
+        },
+        {
+          "id": "demo-log-2",
+          "timestamp": "2026-10-08T21:00:00.000Z",
+          "createdAt": "2026-10-08T21:00:00.000Z",
+          "text": "Confirmed the staging trust store is missing an intermediate certificate. Waiting for the environment fix."
+        }
+      ]
+    },
+    "n20": {
+      "id": "n20",
+      "title": "Build the portal UI",
+      "category": "Development",
+      "description": "Planned work alongside SSO, with the same preceding objective.",
+      "parent": "n2",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Frontend Team",
+      "days": 0,
+      "children": [
+        "n21"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-08T21:00:00.000Z",
+      "updated": "2026-10-09T01:00:00.000Z",
+      "completedAt": "2026-10-09T01:00:00.000Z",
+      "isParallel": true,
+      "parallelOf": "n4",
+      "ownerIds": [
+        "p12"
+      ]
+    },
+    "n21": {
+      "id": "n21",
+      "title": "Validate accessibility and usability",
+      "category": "Testing",
+      "description": "Continue the UI path independently of SSO and hosting.",
+      "parent": "n20",
+      "isSide": false,
+      "status": "inprogress",
+      "owner": "Frontend & QA",
+      "days": 0,
+      "children": [
+        "n23"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-09T01:00:00.000Z",
+      "ownerIds": [
+        "p13"
+      ]
+    },
+    "n22": {
+      "id": "n22",
+      "title": "Write developer onboarding documentation",
+      "category": "Development",
+      "description": "Another planned objective starting alongside SSO and UI development.",
+      "parent": "n2",
+      "isSide": false,
+      "status": "undefined",
+      "owner": "Developer Experience",
+      "days": 0,
+      "children": [
+        "n24"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-09T05:00:00.000Z",
+      "isParallel": true,
+      "parallelOf": "n4",
+      "ownerIds": [
+        "p14"
+      ]
+    },
+    "n23": {
+      "id": "n23",
+      "title": "Record UI acceptance results",
+      "category": "Testing",
+      "description": "Third step on the UI path, kept in the same column of the parallel group.",
+      "parent": "n21",
+      "isSide": false,
+      "status": "undefined",
+      "owner": "Frontend & QA",
+      "days": 0,
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-09T09:00:00.000Z",
+      "ownerIds": [
+        "p13"
+      ]
+    },
+    "n24": {
+      "id": "n24",
+      "title": "Prepare onboarding walkthrough",
+      "category": "Development",
+      "description": "Continue documentation independently while UI validation progresses.",
+      "parent": "n22",
+      "isSide": false,
+      "status": "inprogress",
+      "owner": "Developer Experience",
+      "days": 0,
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-09T13:00:00.000Z",
+      "ownerIds": [
+        "p14"
+      ]
+    },
+    "n25": {
+      "id": "n25",
+      "title": "Tune alert thresholds",
+      "category": "Testing",
+      "description": "Parallel observability work, grouped on the pink side questline.",
+      "parent": "n17",
+      "isSide": false,
+      "status": "inprogress",
+      "owner": "SRE",
+      "days": 0,
+      "children": [
+        "n28"
+      ],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-09T17:00:00.000Z",
+      "isParallel": true,
+      "parallelOf": "n18",
+      "ownerIds": [
+        "p10"
+      ]
+    },
+    "n26": {
+      "id": "n26",
+      "title": "Configure log shipping",
+      "category": "Infrastructure",
+      "description": "Log collection can progress alongside metrics and alert tuning.",
+      "parent": "n17",
+      "isSide": false,
+      "status": "complete",
+      "owner": "Platform Ops",
+      "days": 0,
+      "children": [
+        "n29"
+      ],
+      "done": true,
+      "returned": false,
+      "created": "2026-10-09T21:00:00.000Z",
+      "updated": "2026-10-10T01:00:00.000Z",
+      "completedAt": "2026-10-10T01:00:00.000Z",
+      "isParallel": true,
+      "parallelOf": "n18",
+      "ownerIds": [
+        "p11"
+      ]
+    },
+    "n27": {
+      "id": "n27",
+      "title": "Exercise incident escalation",
+      "category": "Testing",
+      "description": "Validate on-call routing independently within the observability group.",
+      "parent": "n17",
+      "isSide": false,
+      "status": "undefined",
+      "owner": "SRE",
+      "days": 0,
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-10T01:00:00.000Z",
+      "isParallel": true,
+      "parallelOf": "n18",
+      "ownerIds": [
+        "p10"
+      ]
+    },
+    "n28": {
+      "id": "n28",
+      "title": "Validate alert noise levels",
+      "category": "Testing",
+      "description": "A follow-up objective stays within the side quest objective group.",
+      "parent": "n25",
+      "isSide": false,
+      "status": "inprogress",
+      "owner": "SRE",
+      "days": 0,
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-10T05:00:00.000Z",
+      "ownerIds": [
+        "p10"
+      ]
+    },
+    "n29": {
+      "id": "n29",
+      "title": "Review logging retention",
+      "category": "Compliance",
+      "description": "A nested side quest branches outside the observability objective group.",
+      "parent": "n26",
+      "isSide": true,
+      "status": "inprogress",
+      "owner": "Compliance",
+      "days": 2,
+      "color": "#06b6d4",
+      "children": [],
+      "done": false,
+      "returned": false,
+      "created": "2026-10-10T09:00:00.000Z",
+      "ownerIds": [
+        "p15"
+      ]
+    }
+  },
+  "seq": 29
+}

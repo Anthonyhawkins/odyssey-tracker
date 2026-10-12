@@ -1,0 +1,9 @@
+{
+  "project": { "title": "Legacy delivery", "goal": "Ship safely", "root": "n1", "created": "2026-01-02T15:04:05.000Z" },
+  "seq": 3,
+  "nodes": {
+    "n1": { "id": "n1", "title": "Legacy delivery", "category": "Main Quest", "owner": "Platform Engineering", "children": ["n2", "n3"], "isSide": false, "done": false, "color": "#3b82f6", "created": "2026-01-02T15:04:05.000Z" },
+    "n2": { "id": "n2", "title": "Implement service", "parent": "n1", "owner": "Platform Engineering", "children": [], "isSide": false, "done": true, "completedAt": "2026-01-03T16:07:08.000Z", "created": "2026-01-02T16:04:05.000Z", "notes": "Legacy notes\nStay plain text", "links": [{ "label": "Ticket", "url": "https://example.com/legacy" }] },
+    "n3": { "id": "n3", "title": "Review", "parent": "n1", "owner": "Architecture Board", "children": [], "isSide": true, "color": "#f97316", "done": false, "blockedBy": "n2", "created": "2026-01-02T17:04:05.000Z" }
+  }
+}

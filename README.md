@@ -66,7 +66,19 @@ The overview displays objective counts, side-quest share, completion, and cumula
 - Movement only supports eligible leaf objectives into an existing open group or at another open questline's endpoint.
 - Notes and logs are plain text; Markdown rendering is not implemented.
 - Prototype layout is custom and heuristic. Very large and unusual graphs need real-browser validation.
-- There is no committed production test harness in this package. Previous logic/interaction checks used a simulated DOM; they do not establish pixel-level browser correctness.
+- A focused regression suite now covers logic and real Chromium interactions/geometry. It is not exhaustive pixel-level or cross-browser validation; see [test commands and coverage](docs/TESTING.md#automated-regression-checks).
+
+## Regression checks
+
+The app still needs no build step. Tests use Node.js 22 or newer and a pinned Playwright development dependency:
+
+```sh
+npm ci
+npm run test:browser:install
+npm test
+```
+
+`npm run test:logic` runs independently without browser dependencies. Seven executed TODO assertions document four known gap areas in the unchanged prototype; they are not passes. `npm run test:requirements` runs those assertions strictly and currently exits unsuccessfully. See [docs/TESTING.md](docs/TESTING.md#automated-regression-checks) for details and browser prerequisites.
 
 ## Suggested development order
 

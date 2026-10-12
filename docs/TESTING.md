@@ -1,8 +1,72 @@
 # Regression checklist
 
-Use the unchanged `index.html` as the comparison baseline. This checklist is a handoff plan, not a claim that a production test suite is included.
+Use the unchanged `index.html` as the comparison baseline. A focused automated regression suite now accompanies this manual checklist; it does not replace the remaining manual scenarios or constitute exhaustive production validation.
 
 Previous prototype validation included logic and interaction checks in a simulated DOM. Real-browser pixel-level verification was not established by those checks. Validate layout changes in an actual browser with normal measurements, resizing, scrolling, and SVG layering.
+
+## Automated regression checks
+
+Requires Node.js 22 or newer. From the repository root:
+
+```sh
+npm ci
+npm run test:browser:install
+npm test
+```
+
+The pinned development dependency and `package-lock.json` make installation reproducible. Browser installation downloads Playwright's Chromium into the user cache. Browser tests start their own test-only server on `127.0.0.1:8765` and close it afterward. The port must be free. Every test uses a fresh, nonpersistent browser context; personal browser profiles and project storage are untouched.
+
+| Command | Purpose |
+| --- | --- |
+| `npm run test:logic` | Node's built-in runner; no npm dependencies or browser installation needed |
+| `npm run test:browser` | Real Chromium interactions, measured geometry, persistence, and memory-only flows |
+| `npm test` | Logic followed by browser checks |
+| `npm run test:requirements` | Strict execution of the known-gap assertions; currently exits with failures |
+
+The app's runtime Tailwind CDN must be reachable for browser rendering checks. Tests explicitly wait for utility CSS; missing CSS is a test failure, not an accepted unstyled result. For a managed environment with an existing Chromium binary, `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` may supply its absolute executable path. Prefer the pinned browser installed by the command above for comparable results.
+
+Browser screenshots, failure traces, and runner output go into ignored `test-results/`. Reference screenshots under `docs/screenshots/` are never automatically overwritten. The tests assert interaction and geometry invariants; they do not perform golden-image pixel comparisons or establish subjective smoothness for every graph.
+
+### Logic coverage
+
+- The helper loads the actual inline `questApp()` from `index.html` into an isolated VM. It defers DOM/render callbacks and emulates storage/export boundaries; it does not duplicate product methods or claim visual verification.
+- Independent graph validation checks IDs, reciprocal parent/child lists, parallel/blocker/merge references, bank references, and structural cycles after ordinary mutations.
+- Tests cover additions and branch-relative positioning, 4/9/24-member row allocation in all density modes, density persistence, deletion/move guards, confirmation revalidation, cancellation, full content/timestamp preservation, group dissolution, and Undo.
+- Frozen example and synthetic legacy-owner fixtures cover `sidequests-v1`, export/storage shape differences, owner migration, safe ID allocation with an old sequence, optional storage, shared banks, editor drafts, log validation, safe links, replacement confirmation, and the 50-snapshot Undo limit. See [fixture provenance](../tests/fixtures/README.md).
+
+### Browser coverage
+
+- Central trunk thickness, curved paths, opaque markers after paths in SVG order, group header actions, and external endpoint placement.
+- Nested merge to the parent lane, source work before the merge, and stable earlier merge anchoring after a destination append.
+- Actual 24-card rendering in all densities, access to the last card through scrolling, adjacent card clearance, editor access, and saved density after reopening the origin.
+- Dependencies across lanes and within a group, retained resolved connectors, and connector endpoint changes/alignment during horizontal group scrolling.
+- Legacy storage loaded into a real page; saved notes survive reopening the origin, while Cancel preserves storage.
+- Embedded iframe and storage-access failures: Add log updates the draft, Save applies it in memory, and Cancel discards a later edit.
+- Overview sizing, adjacent desktop drawers, mutually exclusive Notes/Log, and narrow overlays.
+
+### Known requirements gaps
+
+These are executable desired-behavior assertions in `tests/logic/known-gaps.test.cjs`, not assertions that the bugs are correct. In the baseline logic run they execute as seven TODOs. The strict command removes TODO status so the unresolved requirements cannot be mistaken for passing acceptance checks. Remove each TODO classification when its fix lands and keep the requirement assertion.
+
+| Gap | Assertions | Required behavior |
+| --- | --- | --- |
+| G1: editor completion history | G1a, G1b | Completion through Save sets `completedAt`; reopening handles the applicable timestamp consistently with endpoint completion |
+| G2: parallel closure | G2 | A parallel follow-up inherits abandonment closure from its owning questline |
+| G3: merge tip after a move | G3 | Rejoin targets the actual destination endpoint after moving an older-ID leaf after newer work |
+| G4: Undo in dialogs | Three G4 cases | Keyboard application Undo is suppressed in contact, tag, and insights dialogs |
+
+The tests-only change leaves `index.html` unchanged. These gaps remain product work for the next step. Full manual checks, broad graph collision coverage, touch/pan behavior, other browsers, and pixel comparisons remain outstanding.
+
+### Initial validation results
+
+Validated October 12, 2026 with Node.js 22.12.0, Playwright 1.58.2, and its pinned headless Chromium 145.0.7632.6:
+
+- Logic: 61 passes and seven executed TODO assertions; no unexpected failures.
+- Browser: all eight scenarios pass, including 24-card rendering in all densities, dependency scrolling, and embedded/storage-failure editing.
+- Strict known requirements: seven failures, reproducing G1–G4 as documented above.
+- `index.html` remains byte-for-byte identical to accepted checkpoint `6943ce7`.
+
+The reference screenshots were captured earlier in Chromium 140.0.7339.16. They remain unchanged; this suite uses geometry/interaction checks rather than treating cross-version pixel differences as acceptance results.
 
 ## Baseline setup
 
