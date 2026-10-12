@@ -100,6 +100,7 @@ Reduce spacing and type size with density. All modes retain access to the full e
 - Provide In progress, Undefined, and Complete states. Undefined uses a dotted card outline.
 - Derive blocked display from the explicit dependency, while preserving the underlying card state.
 - Show date and time for applicable Created, Updated, Completed, Merged, and Abandoned events, using consistent local formatting.
+- Record completion time when a card transitions to Complete, including through editor Save. Reopening clears the applicable completion time consistently with endpoint completion. Ordinary edits preserve existing history; do not invent missing historical completion dates for legacy cards.
 - Preserve historical timestamp values across moves; placement correction does not create a new card or rewrite its history.
 - Use Tailwind `-500` swatches for questline and tag color selection instead of a free-form color picker.
 - Use suitable embedded Lucide icons for categories; preserve licensing when extracting assets.

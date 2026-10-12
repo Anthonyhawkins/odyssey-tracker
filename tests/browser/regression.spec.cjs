@@ -186,3 +186,36 @@ test('overview collapse expands canvas; Notes/Log switch from adjacent drawers t
   const log = await page.locator('#card-log-drawer').boundingBox(); expect(log.x).toBe(0); expect(log.width).toBe(390); expect(log.height).toBe(844);
   await page.screenshot({ path: info.outputPath('narrow-log.png') });
 });
+
+test('editor completion records history, preserves it on unrelated saves, and reopening clears it', async ({ page }) => {
+  await load(page);
+  await page.evaluate(() => Alpine.$data(document.body).openEdit('n13'));
+  await page.locator('#questState').selectOption('complete');
+  await page.getByRole('button', { name: 'Save changes', exact: true }).click();
+  const completed = await page.evaluate(() => JSON.parse(localStorage.getItem('sidequests-v1')).nodes.n13.completedAt);
+  expect(completed).toBeTruthy();
+  await page.evaluate(() => Alpine.$data(document.body).openEdit('n13'));
+  await expect(page.locator('.editor-card-history')).toContainText('Completed');
+  await page.locator('#taskTitle').fill('Scope confirmed');
+  await page.getByRole('button', { name: 'Save changes', exact: true }).click();
+  expect(await page.evaluate(() => Alpine.$data(document.body).nodes.n13.completedAt)).toBe(completed);
+  await page.evaluate(() => Alpine.$data(document.body).openEdit('n13'));
+  await page.locator('#questState').selectOption('inprogress');
+  await page.getByRole('button', { name: 'Save changes', exact: true }).click();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('sidequests-v1')).nodes.n13.completedAt)).toBeNull();
+});
+
+test('application Undo stays suppressed on bank/insights dialog buttons and resumes after closing', async ({ page }) => {
+  await load(page);
+  await page.evaluate(() => { const a = Alpine.$data(document.body); a.nodes.n19.notes += '\nSaved update'; a.persist(); a.notice = ''; });
+  for (const dialog of ['showContacts', 'showTags', 'showInsights']) {
+    await page.evaluate((key) => { Alpine.$data(document.body)[key] = true; }, dialog);
+    const overlay = page.locator(`[x-show="${dialog}"]`);
+    await expect(overlay).toBeVisible(); await overlay.locator('button').first().focus();
+    await page.keyboard.press('Control+z');
+    expect(await page.evaluate(() => Alpine.$data(document.body).nodes.n19.notes)).toContain('Saved update');
+    await page.evaluate((key) => { Alpine.$data(document.body)[key] = false; }, dialog);
+  }
+  await page.getByRole('button', { name: 'Undo', exact: false }).first().focus(); await page.keyboard.press('Control+z');
+  expect(await page.evaluate(() => Alpine.$data(document.body).nodes.n19.notes)).not.toContain('Saved update');
+});

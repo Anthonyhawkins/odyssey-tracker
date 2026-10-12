@@ -2,11 +2,11 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { mutationApp, node, createApp, reviewMove, assertGraph } = require('../helpers/app.cjs');
 
-// Assertions express desired requirements, not the buggy result. They EXECUTE
-// as TODOs in the baseline run. test:requirements removes TODO status and fails
-// until the corresponding product fixes land. Remove each TODO after fixing it.
+// Keep the original gap IDs as regression labels. Only unresolved requirements
+// execute as TODOs; test:requirements runs those strictly as well.
+const unresolved = new Set(['G2', 'G3']);
 function gap(id, name, check) {
-  test(`${id}: ${name}`, { todo: process.env.STRICT_REQUIREMENTS !== '1' && 'Confirmed baseline gap; see docs/TESTING.md' }, check);
+  test(`${id}: ${name}`, { todo: unresolved.has(id) && process.env.STRICT_REQUIREMENTS !== '1' && 'Confirmed baseline gap; see docs/TESTING.md' }, check);
 }
 
 gap('G1a', 'editor completion records a completion timestamp', () => {

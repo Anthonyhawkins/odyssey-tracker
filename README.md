@@ -6,7 +6,7 @@ The visual model takes inspiration from Git commit flow diagrams: a central main
 
 ## Handoff baseline
 
-This package contains the accepted single-file prototype and documentation prepared on October 12, 2026. `index.html` is an unchanged copy of the final downloaded `side-quests.html` prototype (source version 60). Documentation describes implemented behavior and preserves decisions made during iteration; it is not a promise that every possible graph has been tested.
+This package contains the accepted single-file prototype and documentation prepared on October 12, 2026. The original `index.html` is preserved at Git checkpoint `6943ce7` as an unchanged copy of the final downloaded `side-quests.html` prototype (source version 60). The current file includes focused behavior corrections tracked by the regression suite. Documentation describes implemented behavior and preserves decisions made during iteration; it is not a promise that every possible graph has been tested.
 
 Start by running and understanding this baseline. Make small, reviewable changes and preserve its appearance, interactions, and existing data before introducing a new architecture.
 
@@ -78,7 +78,7 @@ npm run test:browser:install
 npm test
 ```
 
-`npm run test:logic` runs independently without browser dependencies. Seven executed TODO assertions document four known gap areas in the unchanged prototype; they are not passes. `npm run test:requirements` runs those assertions strictly and currently exits unsuccessfully. See [docs/TESTING.md](docs/TESTING.md#automated-regression-checks) for details and browser prerequisites.
+`npm run test:logic` runs independently without browser dependencies. Two executed TODO assertions remain for questline closure and merge anchoring; completion-history and dialog Undo checks now pass as regular regressions. `npm run test:requirements` runs those assertions strictly and currently exits unsuccessfully. See [docs/TESTING.md](docs/TESTING.md#automated-regression-checks) for details and browser prerequisites.
 
 ## Suggested development order
 

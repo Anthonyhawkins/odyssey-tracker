@@ -109,3 +109,24 @@ test('links allow only HTTP/HTTPS/mailto and generated link labels cannot inject
   const markup = app.cardLinksHTML('n4'); assert.ok(!markup.includes('<img')); assert.ok(markup.includes('&lt;img'));
   assert.ok(markup.includes('rel="noopener noreferrer"')); assert.ok(markup.includes('target="_blank"'));
 });
+
+test('new complete cards record creation-time completion, including a new project root', () => {
+  const { app } = mutationApp();
+  app.openAdd('n6', 'next'); app.form.title = 'Already complete'; app.form.status = 'complete'; app.saveForm();
+  const saved = app.nodes[app.pendingFocus]; assert.equal(saved.completedAt, saved.created);
+  app.newProject(); app.form.title = 'Completed delivery'; app.form.status = 'complete'; app.saveForm();
+  assert.equal(app.nodes.n1.completedAt, app.nodes.n1.created); assertGraph(app);
+});
+
+test('editing complete legacy cards preserves existing or absent completion history; transitions are undoable', () => {
+  const { app } = mutationApp(); const historical = app.nodes.n4.completedAt;
+  app.openEdit('n4'); app.form.notes += '\nMore context'; app.saveForm();
+  assert.equal(app.nodes.n4.completedAt, historical);
+  delete app.nodes.n4.completedAt; app.lastSnapshot = app.snapshot();
+  app.openEdit('n4'); app.form.notes += '\nLegacy context'; app.saveForm();
+  assert.ok(!app.nodes.n4.completedAt, 'Do not invent a legacy completion time');
+  app.openEdit('n4'); app.form.status = 'undefined'; app.saveForm(); assert.equal(app.nodes.n4.completedAt, null);
+  app.openEdit('n4'); app.form.status = 'complete'; const before = app.snapshot(); app.saveForm();
+  assert.equal(app.nodes.n4.completedAt, app.nodes.n4.updated);
+  app.undo(); assert.equal(app.snapshot(), before);
+});
