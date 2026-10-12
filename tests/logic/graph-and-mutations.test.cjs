@@ -172,3 +172,43 @@ test('nested rejoin targets its originating side quest and preserves anchoring a
   const merge = plain(app.nodes[work]); add(app, 'n4');
   assert.deepEqual(plain(app.nodes[work]), merge); assertGraph(app);
 });
+
+for (const termination of ['abandoned', 'returned']) test(`${termination} owning questline closes parallel members, follow-ups and move destinations`, () => {
+  const { app } = createApp(); app.loadDemo(); app.nodes.n18[termination] = true;
+  for (const id of ['n17', 'n18', 'n25', 'n26', 'n27', 'n28']) assert.equal(app.branchClosed(id), true, id);
+  assert.match(app.moveReasons('n28').join(' '), /closed/);
+  assert.ok(!app.moveDestinations('n21').some((d) => d.key === 'group:n18' || d.key === 'line:n17'));
+  const before = app.snapshot(); app.openAdd('n28', 'next'); assert.equal(app.modal, false); assert.equal(app.snapshot(), before);
+  if (termination === 'abandoned') { app.toggleDone('n28'); assert.equal(app.snapshot(), before); }
+  assert.equal(app.branchClosed('n29'), false, 'Nested side quests continue independently');
+  assert.equal(app.branchClosed('n16'), false, 'Parent mainline stays independent');
+});
+
+test('parallel path termination stays local; completion alone does not close owning questline', () => {
+  const { app } = createApp(); app.loadDemo(); app.nodes.n28.abandoned = true;
+  assert.equal(app.branchClosed('n25'), true); assert.equal(app.branchClosed('n26'), false);
+  assert.equal(app.branchClosed('n18'), false); assert.equal(app.branchClosed('n29'), false);
+  delete app.nodes.n28.abandoned; app.nodes.n18.done = true;
+  assert.equal(app.branchClosed('n28'), false);
+});
+
+test('a mainline closure reaches its parallel group but does not close independent side quests', () => {
+  const { app } = mutationApp(); app.nodes.n2.abandoned = true;
+  assert.equal(app.branchClosed('n5'), true); assert.equal(app.branchClosed('n4'), false);
+  assert.equal(app.branchClosed('n6'), false);
+});
+
+for (const kind of ['next', 'side', 'parallel']) test(`${kind} addition revalidates closure after opening, before allocating an ID or saving banks`, () => {
+  const { app } = createApp(); app.loadDemo(); app.openAdd('n28', kind); app.form.title = 'Queued work';
+  app.form.people.push({ name: 'Unsaved contact', email: '' }); app.nodes.n18.abandoned = true;
+  const before = app.snapshot(); app.saveForm(); assert.match(app.formError, /closed/); assert.equal(app.snapshot(), before);
+});
+
+test('abandoning owning line is undoable, and a reviewed parallel move rechecks later closure', () => {
+  const { app } = createApp(); app.loadDemo(); const before = app.snapshot();
+  app.openAbandon('n18'); app.abandonDialog.reason = 'Terminated'; app.saveAbandon();
+  assert.equal(app.branchClosed('n28'), true); app.undo(); assert.equal(app.snapshot(), before);
+  assert.equal(app.branchClosed('n28'), false);
+  reviewMove(app, 'n28', 'line:n1'); app.nodes.n18.abandoned = true; app.confirmMove();
+  assert.equal(app.nodes.n28.parent, 'n25'); assert.equal(app.moveDialog.review, false); assert.match(app.moveError, /closed/);
+});

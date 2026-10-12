@@ -163,6 +163,7 @@ Current selectable categories: Development; Meeting; Approval Board; External Pr
 - Show the termination symbol/reason/time and allow editing abandonment details.
 - Preserve prior work. Abandonment is not deletion, completion, or automatic merge.
 - Close further progression on that questline; Undo can restore the prior open state.
+- Owning-questline closure applies to its parallel members and follow-ups, including moves and an Add form opened before closure. A termination on an individual parallel path stays local to that path; nested side questlines remain independent.
 - Protect recorded abandonment cards from deletion and movement.
 
 ## 12. Safe single-card deletion

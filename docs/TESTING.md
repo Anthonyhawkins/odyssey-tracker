@@ -46,16 +46,16 @@ Browser screenshots, failure traces, and runner output go into ignored `test-res
 
 ### Known requirements gaps
 
-These are executable desired-behavior assertions in `tests/logic/known-gaps.test.cjs`, not assertions that the bugs are correct. Seven assertions originally executed as TODOs. Completion-history and dialog Undo fixes now run as regular regressions; two TODOs remain for G2 and G3. The strict command removes TODO status so the unresolved requirements cannot be mistaken for passing acceptance checks. Remove each TODO classification when its fix lands and keep the requirement assertion.
+These are executable desired-behavior assertions in `tests/logic/known-gaps.test.cjs`, not assertions that the bugs are correct. Seven assertions originally executed as TODOs. Completion-history, dialog Undo, and owning-questline closure fixes now run as regular regressions; one TODO remains for G3. The strict command removes TODO status so the unresolved requirements cannot be mistaken for passing acceptance checks. Remove each TODO classification when its fix lands and keep the requirement assertion.
 
 | Gap | Assertions | Required behavior |
 | --- | --- | --- |
 | G1: editor completion history (fixed) | G1a, G1b | Completion through Save sets `completedAt`; reopening handles the applicable timestamp consistently with endpoint completion |
-| G2: parallel closure | G2 | A parallel follow-up inherits abandonment closure from its owning questline |
+| G2: parallel closure (fixed) | G2 | A parallel follow-up inherits abandonment closure from its owning questline |
 | G3: merge tip after a move | G3 | Rejoin targets the actual destination endpoint after moving an older-ID leaf after newer work |
 | G4: Undo in dialogs (fixed) | Three G4 cases | Keyboard application Undo is suppressed in contact, tag, and insights dialogs |
 
-The accepted original is preserved at checkpoint `6943ce7`. G1 and G4 are fixed in the current implementation; G2 and G3 remain outstanding. Full manual checks, broad graph collision coverage, touch/pan behavior, other browsers, and pixel comparisons remain outstanding.
+The accepted original is preserved at checkpoint `6943ce7`. G1, G2, and G4 are fixed in the current implementation; G3 remains outstanding. Full manual checks, broad graph collision coverage, touch/pan behavior, other browsers, and pixel comparisons remain outstanding.
 
 ### Initial validation results
 
@@ -71,6 +71,10 @@ The reference screenshots were captured earlier in Chromium 140.0.7339.16. They 
 ### Completion-history and dialog Undo corrections
 
 On October 12, 2026, G1 and G4 were promoted to ordinary regression assertions. Logic validation reports 68 passes with two remaining TODOs (G2/G3); all ten Chromium scenarios pass. New checks include completion at card creation, preservation of legacy history, Undo of a completion transition, visible editor history, and keyboard behavior on active dialog buttons.
+
+### Owning-questline closure correction
+
+G2 now runs as an ordinary regression assertion. Logic validation reports 77 passes with one remaining TODO (G3); all eleven Chromium scenarios pass. Added checks cover both merged and abandoned owning lines, parallel follow-ups, stale Add/Move confirmation, local parallel termination, independent nested side quests, disabled controls, and Undo restoration.
 
 ## Baseline setup
 

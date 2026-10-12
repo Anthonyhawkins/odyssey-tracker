@@ -219,3 +219,20 @@ test('application Undo stays suppressed on bank/insights dialog buttons and resu
   await page.getByRole('button', { name: 'Undo', exact: false }).first().focus(); await page.keyboard.press('Control+z');
   expect(await page.evaluate(() => Alpine.$data(document.body).nodes.n19.notes)).not.toContain('Saved update');
 });
+
+test('owning-line abandonment closes parallel controls and movement; nested work stays independent and Undo restores controls', async ({ page }) => {
+  await load(page);
+  await page.evaluate(() => { const a = Alpine.$data(document.body); a.openAbandon('n18'); });
+  await page.locator('#abandonReason').fill('Observability stopped');
+  await page.locator('.abandon-save').click(); await settle(page);
+  await expect(page.locator('[data-group="n18"] .group-header-actions')).toHaveCount(0);
+  await expect(page.locator('[data-group-endpoint="n18"]')).toHaveCount(0);
+  await expect(page.locator('[data-position="n29"] [data-action="next"]')).toHaveCount(1);
+  await page.evaluate(() => Alpine.$data(document.body).openEdit('n28'));
+  await expect(page.locator('.move-card-button')).toBeDisabled();
+  await expect(page.locator('.card-move-section')).toContainText('closed');
+  await page.locator('.editor-footer').getByRole('button', { name: 'Cancel', exact: true }).click();
+  await page.getByRole('button', { name: 'Undo', exact: false }).first().click(); await settle(page);
+  await expect(page.locator('[data-group="n18"] .group-header-actions')).toHaveCount(1);
+  await expect(page.locator('[data-group-endpoint="n18"]')).toHaveCount(1);
+});
