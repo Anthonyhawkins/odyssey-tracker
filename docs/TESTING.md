@@ -22,10 +22,11 @@ The pinned development dependency and `package-lock.json` make installation repr
 | `npm run test:browser` | Real Chromium interactions, measured geometry, persistence, and memory-only flows |
 | `npm test` | Logic followed by browser checks |
 | `npm run test:requirements` | Focused execution of the seven original gap regressions; all now pass |
+| `npm run test:visual` | Separate comparison with the 20 captured reference scenes; requires their Chromium 140 build and matching capture environment |
 
 The app's runtime Tailwind CDN must be reachable for browser rendering checks. Tests explicitly wait for utility CSS; missing CSS is a test failure, not an accepted unstyled result. For a managed environment with an existing Chromium binary, `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` may supply its absolute executable path. Prefer the pinned browser installed by the command above for comparable results.
 
-Browser screenshots, failure traces, and runner output go into ignored `test-results/`. Reference screenshots under `docs/screenshots/` are never automatically overwritten. The tests assert interaction and geometry invariants; they do not perform golden-image pixel comparisons or establish subjective smoothness for every graph.
+Browser screenshots, failure traces, and runner output go into ignored `test-results/`. Reference screenshots under `docs/screenshots/` are never automatically overwritten. The default suite asserts interaction and geometry invariants. The separate visual suite compares reference images with a perceptual color threshold of `0.2` and allows zero differing pixels above that threshold; it also requires exact recorded geometry. See [compatibility and appearance validation](COMPATIBILITY-VALIDATION.md) for the browser-version requirement, timestamp normalization, results, and limitations.
 
 ### Logic coverage
 
@@ -36,6 +37,7 @@ Browser screenshots, failure traces, and runner output go into ignored `test-res
 
 ### Browser coverage
 
+- Complete baseline/legacy save, actual download, Undo, and real reload workflows; moves/deletion with rich content; embedded and storage-read/write failure exports and structural Undo.
 - Central trunk thickness, curved paths, opaque markers after paths in SVG order, group header actions, and external endpoint placement.
 - Nested merge to the parent lane, source work before the merge, and stable earlier merge anchoring after a destination append.
 - Actual 24-card rendering in all densities, access to the last card through scrolling, adjacent card clearance, editor access, and saved density after reopening the origin.
@@ -85,6 +87,10 @@ All four original gap areas are fixed. Markup, CSS, the existing layout/routing 
 ### Dependency redraw during deletion
 
 End-to-end compatibility validation reproduced a group-scroll event between deleting a card and the next render. The prior measured position map still included the removed card, causing `drawBlockingLinks()` to read its missing `blockedBy` field. The renderer now ignores positions whose cards no longer exist. A deterministic Chromium regression fires that scroll before rerender and verifies that the remaining saved dependency still draws without an uncaught error.
+
+### Compatibility and reference comparison
+
+Step 4 validation reports 82 logic passes, 19 Chromium scenario passes, and 20 reference-image comparisons within the documented visual threshold, with exact reference geometry. Details, report hashes, normalization rules, and remaining limitations are in [COMPATIBILITY-VALIDATION.md](COMPATIBILITY-VALIDATION.md). The original fixtures and screenshots remain unchanged.
 
 ## Baseline setup
 

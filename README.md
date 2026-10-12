@@ -17,6 +17,7 @@ Start by running and understanding this baseline. Make small, reviewable changes
 - [AGENTS.md](AGENTS.md): concise instructions for Codex and other coding agents.
 - [Design decisions](docs/DESIGN-DECISIONS.md): accepted choices and approaches that were tried and rejected.
 - [Testing checklist](docs/TESTING.md): manual regression scenarios and priorities for future automated tests.
+- [Compatibility validation](docs/COMPATIBILITY-VALIDATION.md): pre-change saved-data workflows and comparison with the captured appearance baseline.
 
 Browser reference screenshots are available in [docs/screenshots/](docs/screenshots/README.md), captured from the unchanged prototype at desktop and narrow viewport sizes. Review the capture notes and existing layout limitations before changing rendering or spacing.
 
@@ -66,7 +67,7 @@ The overview displays objective counts, side-quest share, completion, and cumula
 - Movement only supports eligible leaf objectives into an existing open group or at another open questline's endpoint.
 - Notes and logs are plain text; Markdown rendering is not implemented.
 - Prototype layout is custom and heuristic. Very large and unusual graphs need real-browser validation.
-- A focused regression suite now covers logic and real Chromium interactions/geometry. It is not exhaustive pixel-level or cross-browser validation; see [test commands and coverage](docs/TESTING.md#automated-regression-checks).
+- A focused regression suite covers logic and real Chromium interactions/geometry. A separate visual run compares the captured reference scenes in their original browser environment. Coverage remains limited to the documented fixtures and scenarios; see [test commands and coverage](docs/TESTING.md#automated-regression-checks).
 
 ## Regression checks
 

@@ -8,6 +8,7 @@
     "test:logic": "node --test tests/logic/*.test.cjs",
     "test:requirements": "node tests/run-requirements.cjs",
     "test:browser": "playwright test",
+    "test:visual": "playwright test --config playwright.visual.config.cjs",
     "test:browser:install": "playwright install chromium"
   },
   "devDependencies": { "@playwright/test": "1.58.2" }

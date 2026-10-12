@@ -1,0 +1,315 @@
+{
+  "implementation": "5b8083b",
+  "baseline": "6943ce7",
+  "sourceSHA256": "2000b2c021a93caa2ec4b41311baa39e46abf16c4cb407bade239da5634bb070",
+  "browser": "140.0.7339.16",
+  "draftTimestamp": "2026-10-12T13:17",
+  "threshold": 0.2,
+  "maxDiffPixels": 0,
+  "comparisons": [
+    {
+      "file": "desktop-overview-expanded.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "9fdc1f4aa8968b55018f6a047ac2e28bd2b367fdc2da6bb0a3a0faa941e10150",
+      "currentSHA256": "9fdc1f4aa8968b55018f6a047ac2e28bd2b367fdc2da6bb0a3a0faa941e10150"
+    },
+    {
+      "file": "desktop-overview-collapsed.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "6aeeafa794fb4300042ddd0978609560c971e499d9097bdb33a1c31ff3a0720e",
+      "currentSHA256": "6aeeafa794fb4300042ddd0978609560c971e499d9097bdb33a1c31ff3a0720e"
+    },
+    {
+      "file": "desktop-full-map-fit.png",
+      "withinTolerance": true,
+      "identicalPNG": false,
+      "referenceSHA256": "dc9ea66797654fc395f291f2869891d1e0ef8229a4d3e39be6d7fc9601d81876",
+      "currentSHA256": "359fd6fea376bbfedf23e513a4eb867497c721a84477b1e487d0a9e73198a1ea"
+    },
+    {
+      "file": "desktop-main-group.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "349c17e478d5786c0a20ee24effc97a0d46696778beb9e4f2298834e2f8e5961",
+      "currentSHA256": "349c17e478d5786c0a20ee24effc97a0d46696778beb9e4f2298834e2f8e5961"
+    },
+    {
+      "file": "desktop-observability-group.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "56bd89b723ca3123712dc8d0731de44d29b1b745ba1d54d3b6d5e9014f2839a8",
+      "currentSHA256": "56bd89b723ca3123712dc8d0731de44d29b1b745ba1d54d3b6d5e9014f2839a8"
+    },
+    {
+      "file": "desktop-nested-branch.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "70b7495a72498a7729efcdcc53f30fc463db4d6fd9542741437f0784ad758de0",
+      "currentSHA256": "70b7495a72498a7729efcdcc53f30fc463db4d6fd9542741437f0784ad758de0"
+    },
+    {
+      "file": "desktop-merge-node.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "aca32dafad226a7771e2ab410196e3c15e5e6bf3b4261a594c4c472e88a0dc6c",
+      "currentSHA256": "aca32dafad226a7771e2ab410196e3c15e5e6bf3b4261a594c4c472e88a0dc6c"
+    },
+    {
+      "file": "desktop-undefined-card.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "62cd31717b9155c6c19d1c75fa942f8cd9b7026937714b058204a637cc947069",
+      "currentSHA256": "62cd31717b9155c6c19d1c75fa942f8cd9b7026937714b058204a637cc947069"
+    },
+    {
+      "file": "desktop-notes-drawer.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "617db040cd489471c3760eafff52c9f3eb9e8154f501c2f11209067f971dac04",
+      "currentSHA256": "617db040cd489471c3760eafff52c9f3eb9e8154f501c2f11209067f971dac04"
+    },
+    {
+      "file": "desktop-log-drawer.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "34c11b65f2813f03e2d47e2a7f77bb41977cfe4dc2fe6ba3dfb5e29648fa108e",
+      "currentSHA256": "34c11b65f2813f03e2d47e2a7f77bb41977cfe4dc2fe6ba3dfb5e29648fa108e"
+    },
+    {
+      "file": "desktop-full-map-natural.png",
+      "withinTolerance": true,
+      "identicalPNG": false,
+      "referenceSHA256": "f1410d8578718c01e306d3d83c0cf301518a123b81f92576bd766ebc15fec10c",
+      "currentSHA256": "551ee2fa0d19228ce995615b5c0d8f86b5d166de372b8efca351fcf94bf62c10"
+    },
+    {
+      "file": "narrow-overview-expanded.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "ecb6d24d69c09ab46d075a8ee7be8f3714b8669f1c60a26199f5433abce54c85",
+      "currentSHA256": "ecb6d24d69c09ab46d075a8ee7be8f3714b8669f1c60a26199f5433abce54c85"
+    },
+    {
+      "file": "narrow-expanded-map-scrolled.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "91480f3b34ba016c6572ac3ff9e82317639d442233a83e8f58dceed78b7e422a",
+      "currentSHA256": "91480f3b34ba016c6572ac3ff9e82317639d442233a83e8f58dceed78b7e422a"
+    },
+    {
+      "file": "narrow-overview-collapsed.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "b64a70e94583c085975fccb165c188a400db9802c5ebd8d8393ad85445514457",
+      "currentSHA256": "b64a70e94583c085975fccb165c188a400db9802c5ebd8d8393ad85445514457"
+    },
+    {
+      "file": "narrow-observability-group.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "2d04fca4078347c1215648bc68229ff2bcde1acf9b9fd82014543a86e29a7b0e",
+      "currentSHA256": "2d04fca4078347c1215648bc68229ff2bcde1acf9b9fd82014543a86e29a7b0e"
+    },
+    {
+      "file": "narrow-group-header.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "e3fe3aa0f3cb4aaa1672927420b1b5432181c203d69d8bbf1c1419ca870394a3",
+      "currentSHA256": "e3fe3aa0f3cb4aaa1672927420b1b5432181c203d69d8bbf1c1419ca870394a3"
+    },
+    {
+      "file": "narrow-group-scrolled.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "2080dd56308c32a6bebb6826c1a1bd83c07528a9ae3d04100cbeeb412f80d577",
+      "currentSHA256": "2080dd56308c32a6bebb6826c1a1bd83c07528a9ae3d04100cbeeb412f80d577"
+    },
+    {
+      "file": "narrow-group-endpoint.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "2ff9a9c1d5d8cc80257768759dab95a698860d91a14ac5f81cb6633a3bf3f410",
+      "currentSHA256": "2ff9a9c1d5d8cc80257768759dab95a698860d91a14ac5f81cb6633a3bf3f410"
+    },
+    {
+      "file": "narrow-notes-drawer.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "58ff9938675880879698b420acf71be1ce8b1773b906c8ccd38815c524f1135b",
+      "currentSHA256": "58ff9938675880879698b420acf71be1ce8b1773b906c8ccd38815c524f1135b"
+    },
+    {
+      "file": "narrow-log-drawer.png",
+      "withinTolerance": true,
+      "identicalPNG": true,
+      "referenceSHA256": "82a97b068668536840d6365b3bd529f2ad9ced9539bf8d83be2953578c1e0c6e",
+      "currentSHA256": "82a97b068668536840d6365b3bd529f2ad9ced9539bf8d83be2953578c1e0c6e"
+    }
+  ],
+  "errors": [],
+  "measurements": [
+    {
+      "label": "desktop-expanded",
+      "viewport": {
+        "width": 1600,
+        "height": 1000
+      },
+      "overview": true,
+      "zoom": 1,
+      "graph": {
+        "width": 3280,
+        "height": 4369
+      },
+      "canvas": {
+        "width": 1320,
+        "height": 556.5,
+        "left": 263,
+        "top": 406.5
+      },
+      "document": {
+        "width": 1600,
+        "height": 1000
+      },
+      "cards": 26,
+      "groups": [
+        {
+          "id": "n4",
+          "width": 668,
+          "height": 322,
+          "scrollWidth": 668,
+          "clientWidth": 666
+        },
+        {
+          "id": "n18",
+          "width": 1104,
+          "height": 196,
+          "scrollWidth": 1104,
+          "clientWidth": 1102
+        }
+      ]
+    },
+    {
+      "label": "desktop-collapsed",
+      "viewport": {
+        "width": 1600,
+        "height": 1000
+      },
+      "overview": false,
+      "zoom": 1,
+      "graph": {
+        "width": 3280,
+        "height": 4369
+      },
+      "canvas": {
+        "width": 1320,
+        "height": 739.5,
+        "left": 263,
+        "top": 223.5
+      },
+      "document": {
+        "width": 1600,
+        "height": 1000
+      },
+      "cards": 26,
+      "groups": [
+        {
+          "id": "n4",
+          "width": 668,
+          "height": 322,
+          "scrollWidth": 668,
+          "clientWidth": 666
+        },
+        {
+          "id": "n18",
+          "width": 1104,
+          "height": 196,
+          "scrollWidth": 1104,
+          "clientWidth": 1102
+        }
+      ]
+    },
+    {
+      "label": "narrow-expanded",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overview": true,
+      "zoom": 1,
+      "graph": {
+        "width": 2820,
+        "height": 4621
+      },
+      "canvas": {
+        "width": 368,
+        "height": 180,
+        "left": 11,
+        "top": 927
+      },
+      "document": {
+        "width": 390,
+        "height": 844
+      },
+      "cards": 26,
+      "groups": [
+        {
+          "id": "n4",
+          "width": 232,
+          "height": 448,
+          "scrollWidth": 450,
+          "clientWidth": 230
+        },
+        {
+          "id": "n18",
+          "width": 232,
+          "height": 448,
+          "scrollWidth": 450,
+          "clientWidth": 230
+        }
+      ]
+    },
+    {
+      "label": "narrow-collapsed",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overview": false,
+      "zoom": 1,
+      "graph": {
+        "width": 2820,
+        "height": 4621
+      },
+      "canvas": {
+        "width": 368,
+        "height": 292,
+        "left": 11,
+        "top": 502
+      },
+      "document": {
+        "width": 390,
+        "height": 844
+      },
+      "cards": 26,
+      "groups": [
+        {
+          "id": "n4",
+          "width": 232,
+          "height": 448,
+          "scrollWidth": 450,
+          "clientWidth": 230
+        },
+        {
+          "id": "n18",
+          "width": 232,
+          "height": 448,
+          "scrollWidth": 450,
+          "clientWidth": 230
+        }
+      ]
+    }
+  ],
+  "geometryMatches": true
+}
