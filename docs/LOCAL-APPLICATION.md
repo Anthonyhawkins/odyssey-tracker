@@ -1,5 +1,7 @@
 # Local application guide
 
+For a walkthrough of the interface, see the [illustrated user guide](USER-GUIDE.md).
+
 ## Build and start
 
 ```sh

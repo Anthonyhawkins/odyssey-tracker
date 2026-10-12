@@ -2,7 +2,7 @@
 
 ## Read first
 
-Read `README.md` and the relevant sections of `REQUIREMENTS.md` before changing behavior. For graph/layout changes, also read `docs/DESIGN-DECISIONS.md` and `docs/TESTING.md`. `index.html` is the accepted prototype baseline.
+Read `README.md`, `docs/README.md`, and the relevant sections of `docs/REQUIREMENTS.md` before changing behavior. For graph/layout changes, also read `docs/DESIGN-DECISIONS.md` and `docs/TESTING.md`. `index.html` is the accepted prototype baseline.
 
 ## Working approach
 
@@ -27,7 +27,7 @@ Read `README.md` and the relevant sections of `REQUIREMENTS.md` before changing 
 ## Data and mutation safeguards
 
 - Preserve stable card/contact/tag IDs, graph references, timestamps, and existing saved-data compatibility.
-- Preserve the `sidequests-v1` storage key or migrate it explicitly. Export shape and storage shape differ; see README.
+- Preserve the `sidequests-v1` storage key or migrate it explicitly. Export shape and storage shape differ; see `docs/README.md`.
 - Structural changes must keep `parent`, `children`, and parallel references consistent and prevent cycles/dangling references.
 - Delete only an eligible single card. Retain guards for roots, children, blocker dependents, parallel anchors, merge records/anchors/origins, and abandonment records.
 - Move only eligible leaf objectives. Retain review/confirmation, unsaved-edit protection, closed-questline restrictions, cycle prevention, and stale-plan revalidation.

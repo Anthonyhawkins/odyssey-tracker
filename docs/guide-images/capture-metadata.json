@@ -1,0 +1,75 @@
+{
+  "browser": "145.0.7632.6",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "source": "Local Go application; built-in example only",
+  "captures": [
+    {
+      "file": "welcome.png",
+      "description": "First-run welcome and getting-started guide",
+      "sha256": "f496c1d1cfa391486e2aa20984453755a0f40df8dd45013e55538db007fea216"
+    },
+    {
+      "file": "new-project.png",
+      "description": "New project editor before creation",
+      "sha256": "ddd6251d216f479ac5821a3a84258ca8015cd656259e45f760a482e50331911b"
+    },
+    {
+      "file": "overview.png",
+      "description": "Built-in project overview, metrics, and quest-map controls",
+      "sha256": "230d2c973447ceeca2d34514baa5f8b91092eeabe3a2619fbf7ae489b2d1769a"
+    },
+    {
+      "file": "quest-map.png",
+      "description": "Main questline and branching work at 50% zoom",
+      "sha256": "0d87b5ab1e32e12370e01ebb6fb559112efbd5619eb9dd9544ff7020a0056286"
+    },
+    {
+      "file": "parallel-group.png",
+      "description": "Parallel objectives on the observability side questline",
+      "sha256": "ac074d7839ebadc7b5ab603656ccea2d2fbb7de469247340f72d47ca6328f380"
+    },
+    {
+      "file": "card-details.png",
+      "description": "Card editor with title, status, questline color, and work category",
+      "sha256": "38035c9912ff68741129de6aeb7e29fbcb87bf712981f38e476eb1e0297e9daa"
+    },
+    {
+      "file": "notes.png",
+      "description": "Plain-text notes alongside card details",
+      "sha256": "b8b4d3d54e358226c0594d1ef2517a55405979f58e6ca34fd7853ac6f20a9c01"
+    },
+    {
+      "file": "log.png",
+      "description": "Timestamped progress log alongside card details",
+      "sha256": "8612fb5b545a5bdd625d5bd6c777be2b7ae87cdb3271a5278ffb73b41b78ed8a"
+    },
+    {
+      "file": "contacts.png",
+      "description": "Shared project contact bank",
+      "sha256": "c7afbef820d9f2a776bd9246c644564998607e946849979e11b4c6914bc176b4"
+    },
+    {
+      "file": "tags.png",
+      "description": "Shared colored tag bank",
+      "sha256": "1e249e26e5f6a09d595deacaa18a71282108307da037cd9e4daf4d147543eb14"
+    },
+    {
+      "file": "insights.png",
+      "description": "Project insights and progress metrics",
+      "sha256": "7513f7ecb8befa671be4c63dbbe0a410bc2ab0d93c92c67dd052b9a5e129b8f8"
+    },
+    {
+      "file": "projects.png",
+      "description": "Local project library and file actions",
+      "sha256": "51301b4ce4a821689606be934e786f584911a3129c896367ea703a4445ca3a52"
+    },
+    {
+      "file": "backdrop.png",
+      "description": "Optional embedded map backdrop",
+      "sha256": "8de1b2268c9a3d0f7c1059d8b6503a530595f44c03b976a758d37eab53e139a4"
+    }
+  ]
+}

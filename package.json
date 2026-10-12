@@ -10,6 +10,7 @@
     "test:browser": "playwright test",
     "test:visual": "playwright test --config playwright.visual.config.cjs",
     "test:local": "playwright test --config playwright.local.config.cjs",
+    "docs:screenshots": "node scripts/capture-guide.cjs",
     "build:local": "go build -trimpath -o dist/ .",
     "test:browser:install": "playwright install chromium"
   },
