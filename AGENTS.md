@@ -11,6 +11,7 @@ Read `README.md`, `docs/README.md`, and the relevant sections of `docs/REQUIREME
 - Keep the app usable when browser storage is unavailable and in embedded previews. In-memory state is authoritative; saving must not block editing.
 - Update these documents when intentionally changing a product rule. Distinguish existing behavior from proposed work.
 - Use Git checkpoints and avoid unrelated cleanup in feature changes.
+- Record user-facing changes under Unreleased in `CHANGELOG.md`; keep dated release entries and version metadata consistent.
 
 ## Graph invariants
 

@@ -8,7 +8,7 @@ Follow the main questline, see where effort branches out, and keep a record of w
 
 ![Odysseus Tracker showing a main questline and independent branches](docs/guide-images/quest-map.png)
 
-[Explore the illustrated user guide](docs/USER-GUIDE.md) · [Installation and configuration](docs/LOCAL-APPLICATION.md)
+[Explore the illustrated user guide](docs/USER-GUIDE.md) · [Installation and configuration](docs/LOCAL-APPLICATION.md) · [Changelog](CHANGELOG.md)
 
 ## Why use it?
 
