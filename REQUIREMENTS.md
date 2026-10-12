@@ -20,13 +20,13 @@ The product must expose the additional work and inefficiency involved in enterpr
 
 ## 2. Project and overview
 
-- Support creating one current project with a name, goal/definition of done, and questline color.
+- Support creating one active project with a name, goal/definition of done, and questline color. The local Go application keeps multiple projects in separate JSON files.
 - Use the Odysseus Tracker name and Greek-inspired blue-and-white accents.
 - Show explanatory sidebar definitions for main quest, side quest, objective, completion, abandonment, and parallel objectives.
 - Allow the overview/metrics to collapse so the map has more space.
 - Let the map fill the remaining viewport space and retain zoom, pan, center, and fit controls.
 - Do not restore the removed redundant “Quest tree / Independent lanes” legend row above the controls.
-- Ask before replacing the current project or loading the example. Support Undo for replacement.
+- Ask before replacing the current project or loading the example. Support Undo for replacement within an active file. In Go mode, New project creates a separate file; switching files starts a separate session Undo history.
 - Show total work, side-quest share, completion, and manually estimated cumulative delay. Do not present cumulative estimates as a schedule forecast or critical path.
 
 ## 3. Questline structure and visual flow
@@ -208,7 +208,7 @@ Placement correction currently supports one eligible leaf objective, not entire 
 
 - Browser-local storage is optional. Live component state must remain editable when saving is unavailable.
 - Embedded previews use session memory; standalone storage failures also fall back to memory, with a visible notice.
-- Standalone localStorage uses `sidequests-v1` and stores `{project,nodes,seq}`.
+- Static standalone localStorage uses `sidequests-v1` and stores `{project,nodes,seq}`.
 - Export JSON uses `{project,nodes}`; there is no import UI yet.
 - Undo supports up to 50 prior project/node/sequence snapshots in the current session, through controls and Ctrl/Cmd+Z outside text inputs and active dialogs.
 - Undo is not durable audit history. Do not persist temporary modal or draft state as project data accidentally.
@@ -220,4 +220,19 @@ Keep a complex enterprise developer portal example, including a main parallel gr
 
 ## 16. Explicitly outside this baseline
 
-JSON import, accounts/authentication, server persistence, simultaneous collaboration, multi-project management, critical-path scheduling, Markdown rendering, arbitrary drag-and-drop ordering, whole-branch movement, cascade deletion, and a production build/test toolchain are future decisions, not implemented features.
+A JSON import dialog, accounts, cloud persistence, simultaneous collaboration, critical-path scheduling, Markdown rendering, arbitrary drag-and-drop ordering, whole-branch movement, and cascade deletion remain outside the implemented scope.
+
+## 17. Local runnable application
+
+The requested Go application extends the prototype baseline:
+
+- Build a self-contained executable embedding the frontend, including its styling dependency. Serve the UI in a browser through a loopback HTTP server.
+- Default to a per-user application folder; allow an alternate folder and listen address through CLI flags.
+- Generate `config.yaml` for listen address, projects folder, last project, and welcome completion. Reject invalid configuration without overwriting it.
+- Store each project as a separate `<project-name>.json` containing `{project,nodes,seq}`. Derive filenames from the initial title, keep them stable on title edits, and avoid overwriting same-title projects.
+- Show an explanatory first-run welcome and getting-started guide; reopen it on request. Resume the last selected project when available; report missing/corrupt files without destroying them.
+- Provide project creation, opening, update, and confirmed whole-file deletion. Whole-file deletion cannot be undone; guarded card deletion remains separate.
+- Keep editing authoritative in memory while background saves run. Show failures and allow retry, export, or confirmed reopening of saved data. Prevent switching with an open editor or unsaved write failure.
+- Serialize saves; validate graph references, prevent stale overwrites using revisions, and replace files atomically. Retain existing IDs, card/project fields, timestamps, and export shape. Accept compatible exports without `seq` by deriving it.
+- Keep static/embedded preview and `sidequests-v1` behavior usable. File-backed mode does not silently import, overwrite, or delete browser storage.
+- Preserve accepted graph geometry, appearance, density modes, bank semantics, Save/Cancel, and per-project session Undo.

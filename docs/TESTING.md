@@ -4,6 +4,23 @@ Use the unchanged `index.html` as the comparison baseline. A focused automated r
 
 Previous prototype validation included logic and interaction checks in a simulated DOM. Real-browser pixel-level verification was not established by those checks. Validate layout changes in an actual browser with normal measurements, resizing, scrolling, and SVG layering.
 
+## Local application checks
+
+Requires Go 1.24 or newer, plus the frontend browser prerequisites below:
+
+```sh
+go test -race ./...
+go vet ./...
+npm run build:local
+npm run test:local
+```
+
+Go checks cover configuration, file CRUD, revision conflicts, concurrent saves, malformed graphs, compatible exports, legacy fields, traversal/symlink rejection, session/host checks, script escaping, and atomic-write failure preservation. Five real-browser checks cover offline welcome and project CRUD, stale-save export, failure recovery with live edits, a copied binary running outside the repository and restoring its last project after process restart, and rapid structural/content saves followed by Undo.
+
+The local suite uses port 8766 and temporary data folders; it never opens the user's application folder. Its artifacts go to ignored `test-results-local/`. Build again after frontend changes because assets are embedded at compile time. Cross-compilation verifies compilation only; Windows and Linux binaries still require tests on those operating systems.
+
+The Go transition passed the race-enabled Go suite and vet, all five local browser scenarios, the original 82 logic and 19 browser checks, and all 20 appearance comparisons in the original Chromium 140 environment. Coverage is limited to these scenarios.
+
 ## Automated regression checks
 
 Requires Node.js 22 or newer. From the repository root:
@@ -24,7 +41,7 @@ The pinned development dependency and `package-lock.json` make installation repr
 | `npm run test:requirements` | Focused execution of the seven original gap regressions; all now pass |
 | `npm run test:visual` | Separate comparison with the 20 captured reference scenes; requires their Chromium 140 build and matching capture environment |
 
-The app's runtime Tailwind CDN must be reachable for browser rendering checks. Tests explicitly wait for utility CSS; missing CSS is a test failure, not an accepted unstyled result. For a managed environment with an existing Chromium binary, `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` may supply its absolute executable path. Prefer the pinned browser installed by the command above for comparable results.
+Tailwind is bundled locally; browser rendering checks require no CDN. Tests explicitly wait for utility CSS; missing CSS is a test failure, not an accepted unstyled result. For a managed environment with an existing Chromium binary, `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` may supply its absolute executable path. Prefer the pinned browser installed by the command above for comparable results.
 
 Browser screenshots, failure traces, and runner output go into ignored `test-results/`. Reference screenshots under `docs/screenshots/` are never automatically overwritten. The default suite asserts interaction and geometry invariants. The separate visual suite compares reference images with a perceptual color threshold of `0.2` and allows zero differing pixels above that threshold; it also requires exact recorded geometry. See [compatibility and appearance validation](COMPATIBILITY-VALIDATION.md) for the browser-version requirement, timestamp normalization, results, and limitations.
 

@@ -43,4 +43,6 @@ Do not describe logic tests as visual browser verification. If a check cannot be
 
 ## Local run
 
-From the repository root: `python3 -m http.server 8000`, then open `http://localhost:8000`. No build step is needed for the baseline.
+Go application: `go build -trimpath -o dist/odysseus-tracker .`, then `./dist/odysseus-tracker` and open the printed loopback URL. Use `--data-dir` with a temporary folder for tests. Rebuild after embedded frontend changes. See `docs/LOCAL-APPLICATION.md`.
+
+Static prototype: `python3 -m http.server 8000`, then open `http://localhost:8000`. No build step is needed for this mode. Preserve its browser-storage and embedded-preview behavior alongside file-backed mode.

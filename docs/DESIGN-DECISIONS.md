@@ -45,3 +45,11 @@ Deletion and movement are deliberately narrow. Delete one safe card at a time. M
 ## Incremental maintenance
 
 The single-file implementation is a prototype baseline, not an architectural commitment. Extract code gradually with regression checks. A backend, new framework, import workflow, or production data model should be chosen for an actual product requirement rather than assumed as part of the handoff.
+
+## Local Go application
+
+The requested binary uses a loopback server and browser UI, with per-user data and a CLI override. Go embeds the accepted frontend and a pinned local Tailwind runtime. A small adapter handles file operations around the existing component; graph algorithms and editor/mutation rules remain in the accepted implementation.
+
+The project filename identifies the file independently of later title edits. Same-title creation produces another filename instead of replacing data. Configuration stores application settings and last selection; each JSON stores the existing project/node/sequence snapshot. Exports retain their earlier shape, and opening compatible exports derives a safe sequence.
+
+Live edits remain authoritative while serialized saves run in the background. Atomic replacement protects the previous file from interrupted writes; revision checks refuse stale saves. A visible failure offers Retry, Export, and confirmed Reopen. Switching waits for writes and refuses an open editor or unresolved save failure. Undo applies within the current project's session; switching or creating a separate project starts fresh history. Whole-file deletion is explicitly confirmed and cannot be undone.

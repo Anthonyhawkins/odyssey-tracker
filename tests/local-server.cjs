@@ -1,0 +1,10 @@
+const { spawn } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const os = require('node:os');
+const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'odysseus-local-test-'));
+const executable = path.resolve(__dirname, '../dist/odysseus-tracker') + (process.platform === 'win32' ? '.exe' : '');
+const child = spawn(executable, ['--data-dir', folder, '--listen', '127.0.0.1:8766'], { stdio: 'inherit' });
+child.on('error', (error) => { console.error(error); process.exit(1); });
+child.on('exit', (code) => process.exit(code || 0));
+for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => child.kill(signal));
