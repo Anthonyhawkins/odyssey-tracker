@@ -18,7 +18,7 @@ Start by running and understanding this baseline. Make small, reviewable changes
 - [Design decisions](docs/DESIGN-DECISIONS.md): accepted choices and approaches that were tried and rejected.
 - [Testing checklist](docs/TESTING.md): manual regression scenarios and priorities for future automated tests.
 
-Screenshots are not included. Capture accepted layouts from the running prototype and keep them in `docs/screenshots/` before changing rendering or spacing.
+Browser reference screenshots are available in [docs/screenshots/](docs/screenshots/README.md), captured from the unchanged prototype at desktop and narrow viewport sizes. Review the capture notes and existing layout limitations before changing rendering or spacing.
 
 ## Current features
 

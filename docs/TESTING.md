@@ -6,11 +6,13 @@ Previous prototype validation included logic and interaction checks in a simulat
 
 ## Baseline setup
 
-- [ ] Serve the app locally and load the example. Commit a Git checkpoint before changes.
-- [ ] Capture screenshots for the full map, main parallel group, pink observability group, nested branch, merge node, undefined card, and Notes/Log drawers.
-- [ ] Check wide desktop and narrow viewport behavior, with overview expanded and collapsed.
+Completed baseline capture on October 12, 2026 against unchanged prototype commit `6943ce7`. See [browser references and observations](screenshots/README.md). These checked setup items record work performed, not a pass for the full regression checklist below.
+
+- [x] Serve the app locally and load the example. Commit a Git checkpoint before changes.
+- [x] Capture screenshots for the full map, main parallel group, pink observability group, nested branch, merge node, undefined card, and Notes/Log drawers.
+- [x] Check wide desktop and narrow viewport behavior, with overview expanded and collapsed. Existing narrow-layout limitations are recorded with the screenshots.
 - [ ] Keep personal project data separate. Export it before destructive testing; export does not currently have a matching import UI.
-- [ ] Test changes in a fresh browser profile/origin when useful; avoid overwriting personal storage while resetting the example.
+- [x] Test changes in a fresh browser profile/origin when useful; avoid overwriting personal storage while resetting the example. Captures used an isolated browser context with only built-in example data.
 
 ## Map and layout
 
