@@ -23,7 +23,7 @@ It is useful for service launches, developer platforms, infrastructure provision
 - **Keep context with the work:** add owners, colored tags, links, notes, delay estimates, and timestamped progress logs.
 - **Track outcomes:** mark work complete, leave it undefined, or record why and when a questline was abandoned.
 - **Explore your map:** pan, zoom, center, fit the graph, adjust group density, and choose a dotted grid, plain background, or map backdrop.
-- **Keep projects local:** create and switch between project files, resume the last project, undo session edits, and export JSON backups.
+- **Keep projects local:** create and switch between project files, resume the last project, undo session edits, export JSON backups, and print expanded quest maps as PDFs.
 
 The built-in example walks through an enterprise developer portal launch, including reviews, observability work, parallel objectives, blockers, and unexpected issues.
 

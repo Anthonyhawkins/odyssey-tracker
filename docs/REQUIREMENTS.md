@@ -237,3 +237,14 @@ The requested Go application extends the prototype baseline:
 - Serialize saves; validate graph references, prevent stale overwrites using revisions, and replace files atomically. Retain existing IDs, card/project fields, timestamps, and export shape. Accept compatible exports without `seq` by deriving it.
 - Keep static/embedded preview and `sidequests-v1` behavior usable. File-backed mode does not silently import, overwrite, or delete browser storage.
 - Preserve accepted graph geometry, appearance, density modes, bank semantics, Save/Cancel, and per-project session Undo.
+
+## 18. PDF export through browser printing
+
+- Offer Export PDF for an active project; open a separate read-only print snapshot and invoke the browser print dialog. Users select Save as PDF. No PDF service or runtime dependency is required.
+- Require open card/project drafts to be saved or canceled before exporting. Export applied in-memory state, including when disk saving is unavailable.
+- Render every card expanded in Normal density with full titles, descriptions, owners, links/URLs, tags, state, delays, and timestamps. Unclip parallel groups so all members appear, including groups wider than the live viewport.
+- Reuse the accepted renderer, measuring expanded cards and updating paths/spacing within the snapshot. Preserve topology, blockers (including resolved ones), mainline thickness, marker layering, and historical merge references.
+- Include project title, goal, export date/time, card count, and card references. Add complete plain-text notes and progress logs in a paginated appendix, keyed to those references, retaining entry and edit timestamps.
+- Use a plain background, hide editing controls, and export the map as one custom-sized page followed by A4 appendix pages. Refuse map dimensions above the first version's 18,000 CSS-pixel limit on either axis instead of clipping content. Tiled maps remain future work.
+- Leave live nodes/project, group density, expanded-card state, zoom/pan, saved files/storage, timestamps, and session Undo untouched. Report blocked pop-ups and preparation errors; retain a Print / Save as PDF button for retry after canceling the browser dialog.
+- Test real Chromium PDF generation/page dimensions and print styling, expanded group coverage, safe text, long appendix pagination, and state/file preservation in static, embedded, and Go modes. Native print-dialog settings remain browser-dependent.

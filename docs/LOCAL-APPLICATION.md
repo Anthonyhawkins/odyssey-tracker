@@ -51,6 +51,8 @@ Saving an editor applies changes in memory immediately and queues a file save. *
 
 On a write error, continue editing in memory and use **Retry save** after resolving the cause. **Export JSON** downloads the live state as a backup. **Reopen saved file** explicitly discards unsaved changes after confirmation. Project switching waits for saves and refuses unresolved failures or an open editor. Save or cancel that editor first.
 
+For a readable report, **Export PDF** opens a separate expanded map and notes/log appendix, then the browser print dialog. Select Save as PDF; see the [PDF instructions](USER-GUIDE.md#12-export-an-expanded-map-as-pdf) for page settings. PDF export leaves project files unchanged.
+
 Session Undo covers up to 50 edits in the active project. Creating or opening another project clears session history; restarting does too. **Delete file** deletes an entire project after confirmation and cannot be undone. Card deletion retains all existing eligibility guards and Undo behavior.
 
 ## Bring existing browser data across

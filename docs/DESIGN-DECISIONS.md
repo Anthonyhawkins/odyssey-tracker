@@ -57,3 +57,9 @@ Live edits remain authoritative while serialized saves run in the background. At
 ## Optional map background
 
 The accepted dotted grid remains the default. A toolbar selector also offers a plain background or the user-provided `map.png` backdrop. The backdrop is centered and covers the viewport with no repetition; it does not participate in graph coordinates, card sizing, zoom, or hit testing. Go embeds the original image so copied binaries work offline. This is an application preference in configuration (or browser/session storage for the prototype), leaving project snapshots, exports, and Undo unchanged.
+
+## PDF print snapshot
+
+Export PDF builds a separate read-only document using a deep copy of the current applied state and the accepted quest renderer. It loads already-present styles, forces Normal density and expanded cards only in that copy, removes clipping from groups, then measures and draws paths around the expanded content. It never invokes live editing or persistence methods. This avoids changing saved density, merge coordinates, or Undo merely to prepare a PDF.
+
+The first version uses a custom-sized map page for digital viewing and A4 appendix pages for full notes/logs. Printable references connect appendix entries to cards. Browser printing supplies the Save as PDF workflow; no external PDF service or browser engine is added to the binary. A plain background improves print readability. Maps above 18,000 CSS pixels on either axis produce an explicit preparation error rather than a truncated PDF. Tiled/paper-sized map layouts remain a later feature.

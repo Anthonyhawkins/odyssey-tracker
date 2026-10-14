@@ -131,3 +131,13 @@ Watch **Saving…** and **Saved to file** in the local-app bar. Applied edits re
 Export the live state before discarding changes. Retry after resolving a write problem. If the file changed outside the current tab, export your edits and reopen the saved file before saving again; stale revisions are rejected to protect newer disk content. Reopening explicitly discards unsaved memory changes after confirmation. Project switching refuses unresolved save failures.
 
 For file locations, command-line options, configuration, and migration, see [Local application guide](LOCAL-APPLICATION.md). For implemented product rules and safeguards, see [Requirements](REQUIREMENTS.md).
+
+## 12. Export an expanded map as PDF
+
+Select **Export PDF** in the header. Save or cancel any open editor first. The app opens a separate print view with every card expanded, full-size parallel groups, a plain background, and a notes/log appendix. It exports your applied in-memory work even if a disk save has failed.
+
+In the browser print dialog, choose **Save as PDF**. Keep the document's page sizes, use 100% scale, and turn off browser headers and footers. Check the preview before saving: the map occupies one large page for digital viewing, followed by A4 pages containing full notes and logs. Zoom into the saved PDF to read large maps. Printing the map on ordinary paper may shrink it considerably.
+
+If your browser blocks the new window, allow pop-ups for the local app and try again. Canceling print leaves the preview open; **Print / Save as PDF** opens the dialog again. Live card expansion, group density, zoom/pan, saved data, and Undo stay unchanged. The print snapshot does not update when you continue editing the project; export again for a fresh copy.
+
+Very large maps exceeding 18,000 CSS pixels in width or height show a preparation error. This first version does not tile a map across ordinary paper pages. Browser settings and mixed page-size support vary; Chromium PDF output is covered by the automated checks.

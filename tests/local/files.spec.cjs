@@ -151,3 +151,20 @@ test('background preference uses config and leaves project data and Undo unchang
   expect(after).toEqual(before);
   await page.reload(); await expect(page.getByLabel('Background', { exact: true })).toHaveValue('backdrop');
 });
+
+test('PDF print export works offline from the embedded binary without changing the project file', async ({ page }, info) => {
+  await page.context().addInitScript(() => { window.print = () => { window.printCalls = (window.printCalls || 0) + 1; }; });
+  await page.goto('/');
+  await page.evaluate(async () => { const a = Alpine.$data(document.body); if (a.welcome) { await a.api('welcome', { method: 'POST' }); a.welcome = false; } });
+  await page.locator('.quest-workspace > header').getByRole('button', { name: 'Start new quest', exact: false }).click(); await create(page, 'PDF file project');
+  await page.evaluate(async () => { const a = Alpine.$data(document.body); a.openEdit('n1'); a.form.notes = 'Offline PDF notes'; a.saveForm(); await a.flushDisk(); });
+  const before = await page.evaluate(async () => { const a = Alpine.$data(document.body); return { disk: await a.api('projects/' + a.currentFile), snapshot: a.snapshot(), undo: a.undoStack.length }; });
+  const opening = page.waitForEvent('popup'); await page.getByRole('button', { name: 'Export PDF', exact: false }).click(); const print = await opening;
+  await print.waitForFunction(() => document.documentElement.dataset.printReady === 'true' || document.documentElement.dataset.printError === 'true');
+  await expect(print.locator('html')).toHaveAttribute('data-print-ready', 'true');
+  await expect(print.locator('.appendix')).toContainText('Offline PDF notes'); expect(await print.evaluate(() => window.printCalls)).toBe(1);
+  const pdf = await print.pdf({ preferCSSPageSize: true, printBackground: true }); fs.writeFileSync(info.outputPath('local-project.pdf'), pdf);
+  expect(pdf.subarray(0, 5).toString()).toBe('%PDF-'); await print.close();
+  const after = await page.evaluate(async () => { const a = Alpine.$data(document.body); return { disk: await a.api('projects/' + a.currentFile), snapshot: a.snapshot(), undo: a.undoStack.length }; });
+  expect(after).toEqual(before);
+});

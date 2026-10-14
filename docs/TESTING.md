@@ -49,6 +49,16 @@ Browser screenshots, failure traces, and runner output go into ignored `test-res
 
 The background change passed all 82 logic checks, the 19 existing browser scenarios, four focused background scenarios at 1600px/390px in static and embedded modes, all six local-app browser scenarios, Go race checks, and vet. Real Chromium screenshots of the backdrop were inspected at desktop and narrow widths. Checks compare graph paths, geometry, snapshots, Undo, and saved file revisions before/after background changes, and load the actual PNG. The original pixel-reference suite was not rerun for this change because the requested toolbar control intentionally changes those screenshots; reference files were left untouched.
 
+### PDF export validation
+
+Browser checks generate actual Chromium PDFs with `preferCSSPageSize` and background colors. They verify expanded Normal cards, all 24 members of a wide parallel group, dependency paths/opaque markers, literal safe text, multipage notes/log appendix, custom map and A4 page dimensions, and preservation of live state/storage/Undo. Tests also check open drafts, blocked/denied pop-ups, retry after print cancellation, and refusal of oversized maps. The local suite verifies export from the embedded binary without changing the project file or revision.
+
+The native print dialog is stubbed in automated tests; calling Print and retry are verified separately from actual headless PDF generation. A generated PDF was read with macOS PDFKit to verify searchable card/notes/log text and page dimensions; rendered map/appendix pages were visually inspected. This does not claim manual native-dialog or cross-browser verification. Original pixel references were not regenerated because the requested Export PDF header control intentionally changes the chrome.
+
+Validation passed: 82 logic checks, 23 established browser scenarios, four PDF export scenarios, seven local-app scenarios, and Go race tests/vet. The 140-line notes fixture produced five searchable PDF pages (one map and four A4 appendix pages), including the final note and log entries.
+
+For manual validation, save a PDF through the real browser dialog, check mixed page sizes, every group member, full descriptions/URLs/timestamps, long notes/log pagination, and unchanged working state after both saving and canceling. Try popup denial and standalone/embedded/file-backed modes. Settings vary by browser; see the [user guide](USER-GUIDE.md#12-export-an-expanded-map-as-pdf) and [MDN printing guidance](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing).
+
 ### Logic coverage
 
 - The helper loads the actual inline `questApp()` from `index.html` into an isolated VM. It defers DOM/render callbacks and emulates storage/export boundaries; it does not duplicate product methods or claim visual verification.
