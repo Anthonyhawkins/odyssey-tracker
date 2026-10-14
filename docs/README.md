@@ -27,7 +27,7 @@ Browser reference screenshots are available in [screenshots/](screenshots/README
 | --- | --- |
 | Quest map | Central thicker mainline, independent side and nested questlines, smooth SVG connections, parent-branch merges, lane reuse, zoom/pan/center/fit, relationship focus; Dotted grid, None, or Backdrop background |
 | Objectives | Serial objectives and parallel groups on main or side questlines; balanced grids with at most three rows; Normal, Compact, and Very compact display modes |
-| Lifecycle | In progress, Undefined, Complete; dependency-derived blocked display; abandonment with reason and date; merge history with date and time |
+| Lifecycle | Planning, Ready, In Progress, In Review, Complete; legacy Undefined compatibility; dependency-derived blocked display; abandonment with reason and date; merge history with date and time |
 | Card details | Title, description, category icon, delay estimate, links, multiple owners, colored tags, timestamps, plain-text notes, timestamped progress log |
 | Project banks | Reusable contacts and colored tags with CRUD and card assignment |
 | Safe changes | Confirmation for replacement/deletion/moves, single-card deletion guards, leaf-objective placement correction, session Undo |

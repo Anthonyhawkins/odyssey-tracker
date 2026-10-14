@@ -27,7 +27,7 @@ for (const embedded of [false, true]) {
       const a = Alpine.$data(document.body);
       while (a.parallelGroups().groups.get('n18').members.length < 24) { a.openAdd('n18', 'parallel'); a.form.title = 'Print objective ' + a.seq; a.saveForm(); }
       a.setGroupDensity('n18', 'verycompact'); a.setZoom(0.6); a.expandedCards = { n2: true };
-      a.openEdit('n19'); a.form.notes = 'Plain text <script>window.exportInjected=true</script>\nSecond line\n' + 'Detailed progress context.\n'.repeat(140) + 'Final note marker'; a.saveForm();
+      a.openEdit('n19'); a.form.status = 'inreview'; a.form.category = 'Bug'; a.form.notes = 'Plain text <script>window.exportInjected=true</script>\nSecond line\n' + 'Detailed progress context.\n'.repeat(140) + 'Final note marker'; a.saveForm();
     });
     await app.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await app.evaluate(() => { Alpine.$data(document.body).$refs.canvas.scrollTo({ left: 300, top: 100, behavior: 'instant' }); });
@@ -39,6 +39,8 @@ for (const embedded of [false, true]) {
     await expect(print.locator('[data-card]')).toHaveCount(before.cardCount);
     await expect(print.locator('#questTree .card-secondary-details[hidden]')).toHaveCount(0);
     await expect(print.locator('.compact-quest-card,.very-compact-quest-card')).toHaveCount(0);
+    await expect(print.locator('[data-card="n19"] .quest-status')).toHaveText('In Review');
+    await expect(print.locator('[data-card="n19"] svg.lucide-bug')).toHaveCount(1);
     await expect(print.locator('#questTree button,#questTree select')).toHaveCount(0);
     await expect(print.locator('.appendix')).toContainText('Plain text <script>window.exportInjected=true</script>');
     await expect(print.locator('.appendix')).toContainText('Investigating staging certificate validation failures');

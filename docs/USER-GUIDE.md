@@ -50,9 +50,19 @@ Click a card title to open the detail drawer. Set its title, description, work c
 
 ![Card editor with title, status, questline color, and category](guide-images/card-details.png)
 
-Choose **In progress**, **Undefined**, or **Complete** as appropriate. Blocked presentation is derived from an explicit blocker whose work is not complete. Dependency lines remain visible when a blocker is complete, with resolved dependencies distinguished visually.
+Choose **Planning**, **Ready**, **In Progress**, **In Review**, or **Complete** as appropriate. New cards default to In Progress. Existing Undefined cards retain their state and show **Undefined (legacy)** in the editor until you explicitly choose a new state. Blocked presentation is derived from an explicit blocker whose work is not complete. Dependency lines remain visible when a blocker is complete, with resolved dependencies distinguished visually.
 
-Categories describe the kind of work, while questline colors describe the branch it belongs to. Completing a card is separate from merging a side quest back into its parent. Completion and merge timestamps preserve that distinction.
+| State | Meaning |
+| --- | --- |
+| Planning | Work is being defined or prepared |
+| Ready | Prepared and available to start |
+| In Progress | Work is actively underway |
+| In Review | Awaiting review or validation |
+| Complete | Work is finished |
+
+States are chosen manually; the app does not enforce a sequence or advance them automatically. Only Complete records completion and resolves dependencies on that card.
+
+**Operations** is available for ongoing operational work, and **Bug** for defects. Categories describe the kind of work, while questline colors describe the branch it belongs to. Completing a card is separate from merging a side quest back into its parent. Completion and merge timestamps preserve that distinction.
 
 ## 5. Keep notes and a progress log
 

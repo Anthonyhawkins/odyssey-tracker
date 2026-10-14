@@ -168,3 +168,19 @@ test('PDF print export works offline from the embedded binary without changing t
   const after = await page.evaluate(async () => { const a = Alpine.$data(document.body); return { disk: await a.api('projects/' + a.currentFile), snapshot: a.snapshot(), undo: a.undoStack.length }; });
   expect(after).toEqual(before);
 });
+
+test('new states and categories survive local file saves and reloads', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(async () => { const a = Alpine.$data(document.body); if (a.welcome) { await a.api('welcome', { method: 'POST' }); a.welcome = false; } });
+  const entry = await page.evaluate(async fixture => { const a = Alpine.$data(document.body); const entry = await a.api('projects', { method: 'POST', body: JSON.stringify(fixture) }); await a.openDiskProject(entry.file); return entry; }, fixture);
+  for (const status of ['planning','ready','inprogress','inreview','complete']) {
+    await page.evaluate(() => Alpine.$data(document.body).openEdit('n19'));
+    await page.locator('#questState').selectOption(status);
+    await page.locator('[x-model="form.category"]').selectOption(status === 'planning' ? 'Operations' : 'Bug');
+    await page.getByRole('button', { name: 'Save changes', exact: true }).click(); await saved(page);
+    const stored = await page.evaluate(async file => { const a = Alpine.$data(document.body); await a.flushDisk(); return (await a.api('projects/' + file)).document; }, entry.file);
+    expect(stored.nodes.n19.status).toBe(status); expect(stored.nodes.n19.done).toBe(status === 'complete');
+    expect(stored.nodes.n19.category).toBe(status === 'planning' ? 'Operations' : 'Bug'); expect(stored.nodes.n19.created).toBe(fixture.nodes.n19.created);
+    await page.reload(); expect(await page.evaluate(() => Alpine.$data(document.body).nodes.n19.status)).toBe(status);
+  }
+});

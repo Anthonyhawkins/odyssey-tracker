@@ -18,7 +18,7 @@ The application should remain usable offline, keep its single executable distrib
 
 **First version:** List unfinished cards with no unresolved blocker on an open questline. Separately show blocked work and the card holding it up. Let the user pin a few cards to a personal focus list and jump from an item directly to its map position or editor.
 
-**Keep it predictable:** Explain why each item appears. Undefined work should be identified as needing clarification, rather than automatically treated as ready. Completed, abandoned, and closed work must not become suggestions. Use explicit relationships; do not imply that side quests block their parent or invent a critical-path schedule. Pins stay separate from card status and contact assignments.
+**Keep it predictable:** Explain why each item appears. Planning work and legacy Undefined work should be identified as needing preparation or clarification, rather than automatically treated as Ready. In Review work should be distinguished from work awaiting implementation. Completed, abandoned, and closed work must not become suggestions. Use explicit relationships; do not imply that side quests block their parent or invent a critical-path schedule. Pins stay separate from card status and contact assignments.
 
 ## 3. Recover unfinished editor drafts
 

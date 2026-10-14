@@ -99,7 +99,8 @@ Reduce spacing and type size with density. All modes retain access to the full e
 ## 5. Card fields, states, and categories
 
 - Support title, short description/requirement, category, delay estimate, and card state.
-- Provide In progress, Undefined, and Complete states. Undefined uses a dotted card outline.
+- Provide Planning, Ready, In Progress, In Review, and Complete states; retain In Progress as the creation default. Only Complete sets `done` and completion history.
+- Preserve legacy `undefined` values and their dotted card outline. Existing Undefined cards offer an Undefined (legacy) editor option until explicitly changed; new cards use the five current states. Do not silently rewrite saved lifecycle values on load or unrelated edits.
 - Derive blocked display from the explicit dependency, while preserving the underlying card state.
 - Show date and time for applicable Created, Updated, Completed, Merged, and Abandoned events, using consistent local formatting.
 - Record completion time when a card transitions to Complete, including through editor Save. Reopening clears the applicable completion time consistently with endpoint completion. Ordinary edits preserve existing history; do not invent missing historical completion dates for legacy cards.
@@ -107,9 +108,9 @@ Reduce spacing and type size with density. All modes retain access to the full e
 - Use Tailwind `-500` swatches for questline and tag color selection instead of a free-form color picker.
 - Use suitable embedded Lucide icons for categories; preserve licensing when extracting assets.
 
-Current selectable categories: Development; Meeting; Approval Board; External Process; Work Order / Ticket; Feature Exchange; Security Review; Architecture Review; Infrastructure; Compliance; Testing; Deployment; Unexpected Issue; Other. The project root has its own Main Quest representation.
+Current selectable categories: Development; Operations; Bug; Meeting; Approval Board; External Process; Work Order / Ticket; Feature Exchange; Security Review; Architecture Review; Infrastructure; Compliance; Testing; Deployment; Unexpected Issue; Other. The project root has its own Main Quest representation.
 
-**Unexpected Issue** represents unplanned problems found while doing other work, such as broken environments, errors, or troubleshooting. Use a warning/triangle-alert icon. It is a category, not a fourth lifecycle state.
+**Unexpected Issue** represents unplanned problems found while doing other work, such as broken environments, errors, or troubleshooting. Use a warning/triangle-alert icon. It is a category, separate from lifecycle state. Operations represents ongoing operational work and uses a settings icon; Bug represents a defect and uses a bug icon.
 
 ## 6. Blockers
 

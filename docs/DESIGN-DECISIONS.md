@@ -26,7 +26,7 @@ Per-card quest action strips inside groups were removed. Group header `.` and `!
 
 ## Color, categories, and lifecycle are distinct
 
-Questline color expresses topology and is shared by paths, nodes, and card borders. Category icons express the kind of work. State expresses progress. Unexpected Issue is a category for troubleshooting/unplanned work; Undefined is a state with a dotted outline. Do not use a single field for these separate meanings.
+Questline color expresses topology and is shared by paths, nodes, and card borders. Category icons express the kind of work. State expresses progress. Unexpected Issue is a category for troubleshooting/unplanned work; Planning, Ready, In Progress, In Review, and Complete are selectable lifecycle states. Legacy Undefined keeps its dotted outline and saved value until explicitly changed. Do not use a single field for these separate meanings.
 
 Use Tailwind-500 swatches rather than an unrestricted color picker. Greek-inspired blue-and-white accents and the Odysseus Tracker name are the accepted branding. Circled `!`/`?` nodes need white fill and top-layer rendering because the thicker mainline previously showed through them.
 

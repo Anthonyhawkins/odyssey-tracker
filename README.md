@@ -21,7 +21,7 @@ It is useful for service launches, developer platforms, infrastructure provision
 - **Map delivery:** build a central questline with independent side quests, nested branches, parallel groups, and historical merges.
 - **Make dependencies explicit:** connect blockers and distinguish unresolved dependencies from completed ones.
 - **Keep context with the work:** add owners, colored tags, links, notes, delay estimates, and timestamped progress logs.
-- **Track outcomes:** mark work complete, leave it undefined, or record why and when a questline was abandoned.
+- **Track outcomes:** follow work through Planning, Ready, In Progress, In Review, and Complete, or record why and when a questline was abandoned.
 - **Explore your map:** pan, zoom, center, fit the graph, adjust group density, and choose a dotted grid, plain background, or map backdrop.
 - **Keep projects local:** create and switch between project files, resume the last project, undo session edits, export JSON backups, and print expanded quest maps as PDFs.
 

@@ -59,6 +59,10 @@ Validation passed: 82 logic checks, 23 established browser scenarios, four PDF e
 
 For manual validation, save a PDF through the real browser dialog, check mixed page sizes, every group member, full descriptions/URLs/timestamps, long notes/log pagination, and unchanged working state after both saving and canceling. Try popup denial and standalone/embedded/file-backed modes. Settings vary by browser; see the [user guide](USER-GUIDE.md#12-export-an-expanded-map-as-pdf) and [MDN printing guidance](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing).
 
+### Quest states and category validation
+
+The current editor offers Planning, Ready, In Progress, In Review, and Complete, with conditional legacy Undefined support. Focused checks cover saving/reloading each state, completion/reopening history, Undo and moves, legacy edits, derived blocker/abandonment display, and Operations/Bug icons. Real Chromium checks exercise every state and both categories at all three densities in standalone and embedded modes; local-file checks reload every state from disk. PDF checks include an In Review/Bug card. The In Review rendering was inspected in a browser screenshot. Validation passed: 95 logic checks, 29 Chromium browser scenarios, eight local-app scenarios, and Go race tests/vet. Original prototype references remain unchanged; current lifecycle labels and new icons are intentional UI changes.
+
 ### Logic coverage
 
 - The helper loads the actual inline `questApp()` from `index.html` into an isolated VM. It defers DOM/render callbacks and emulates storage/export boundaries; it does not duplicate product methods or claim visual verification.
