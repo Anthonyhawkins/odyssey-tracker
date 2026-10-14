@@ -77,6 +77,7 @@ The frontend retains the accepted prototype's graph and editor behavior. Go embe
 
 - [Architecture and project history](docs/README.md)
 - [Product requirements](docs/REQUIREMENTS.md)
+- [Potential features](docs/potential-features.md): ten proposed single-user enhancements
 - [Design decisions](docs/DESIGN-DECISIONS.md)
 - [Testing and validation](docs/TESTING.md)
 - [Contributor instructions](AGENTS.md)

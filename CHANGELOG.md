@@ -6,6 +6,7 @@ User-facing changes to Odysseus Tracker are recorded here, newest first. Add upc
 
 ### Added
 
+- Documented ten proposed single-user enhancements in `docs/potential-features.md`, with initial scope, safeguards, and priorities.
 - Export PDF through the browser print dialog: a separate expanded quest map with unclipped parallel groups, printable links, and a full notes/progress-log appendix, preserving live and saved state.
 
 ## 0.1.0 — 2026-10-12
