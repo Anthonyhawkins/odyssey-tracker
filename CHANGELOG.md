@@ -4,13 +4,13 @@ User-facing changes to Odysseus Tracker are recorded here, newest first. Add upc
 
 ## Unreleased
 
+## 0.2.0 — 2026-10-14
+
 ### Added
 
 - DevOps, SysAdmin, and CICD categories with embedded infinity, terminal, and workflow icons.
-
 - Planning, Ready, and In Review quest states alongside In Progress and Complete, preserving legacy Undefined values and derived blocker/abandonment behavior.
 - Operations and Bug categories with matching embedded Lucide icons.
-
 - Documented ten proposed single-user enhancements in `docs/potential-features.md`, with initial scope, safeguards, and priorities.
 - Export PDF through the browser print dialog: a separate expanded quest map with unclipped parallel groups, printable links, and a full notes/progress-log appendix, preserving live and saved state.
 
