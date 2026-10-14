@@ -108,9 +108,9 @@ Reduce spacing and type size with density. All modes retain access to the full e
 - Use Tailwind `-500` swatches for questline and tag color selection instead of a free-form color picker.
 - Use suitable embedded Lucide icons for categories; preserve licensing when extracting assets.
 
-Current selectable categories: Development; Operations; Bug; Meeting; Approval Board; External Process; Work Order / Ticket; Feature Exchange; Security Review; Architecture Review; Infrastructure; Compliance; Testing; Deployment; Unexpected Issue; Other. The project root has its own Main Quest representation.
+Current selectable categories: Development; DevOps; SysAdmin; CICD; Operations; Bug; Meeting; Approval Board; External Process; Work Order / Ticket; Feature Exchange; Security Review; Architecture Review; Infrastructure; Compliance; Testing; Deployment; Unexpected Issue; Other. The project root has its own Main Quest representation.
 
-**Unexpected Issue** represents unplanned problems found while doing other work, such as broken environments, errors, or troubleshooting. Use a warning/triangle-alert icon. It is a category, separate from lifecycle state. Operations represents ongoing operational work and uses a settings icon; Bug represents a defect and uses a bug icon.
+**Unexpected Issue** represents unplanned problems found while doing other work, such as broken environments, errors, or troubleshooting. Use a warning/triangle-alert icon. It is a category, separate from lifecycle state. Operations represents ongoing operational work and uses a settings icon; Bug represents a defect and uses a bug icon. DevOps represents development/operations coordination (infinity icon); SysAdmin represents system administration (terminal icon); CICD represents build/test/release pipelines (workflow icon).
 
 ## 6. Blockers
 

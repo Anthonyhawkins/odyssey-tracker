@@ -6,6 +6,8 @@ User-facing changes to Odysseus Tracker are recorded here, newest first. Add upc
 
 ### Added
 
+- DevOps, SysAdmin, and CICD categories with embedded infinity, terminal, and workflow icons.
+
 - Planning, Ready, and In Review quest states alongside In Progress and Complete, preserving legacy Undefined values and derived blocker/abandonment behavior.
 - Operations and Bug categories with matching embedded Lucide icons.
 

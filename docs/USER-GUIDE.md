@@ -62,7 +62,7 @@ Choose **Planning**, **Ready**, **In Progress**, **In Review**, or **Complete** 
 
 States are chosen manually; the app does not enforce a sequence or advance them automatically. Only Complete records completion and resolves dependencies on that card.
 
-**Operations** is available for ongoing operational work, and **Bug** for defects. Categories describe the kind of work, while questline colors describe the branch it belongs to. Completing a card is separate from merging a side quest back into its parent. Completion and merge timestamps preserve that distinction.
+**DevOps** covers development/operations coordination, **SysAdmin** system administration, and **CICD** build/test/release pipelines. **Operations** is available for ongoing operational work, and **Bug** for defects. Categories describe the kind of work, while questline colors describe the branch it belongs to. Completing a card is separate from merging a side quest back into its parent. Completion and merge timestamps preserve that distinction.
 
 ## 5. Keep notes and a progress log
 
