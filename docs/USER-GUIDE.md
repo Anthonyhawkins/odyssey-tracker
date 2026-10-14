@@ -54,7 +54,7 @@ Choose **Planning**, **Ready**, **In Progress**, **In Review**, or **Complete** 
 
 | State | Meaning |
 | --- | --- |
-| Planning | Work is being defined or prepared |
+| Planning | Work is being defined or prepared; cards have a dotted top border |
 | Ready | Prepared and available to start |
 | In Progress | Work is actively underway |
 | In Review | Awaiting review or validation |

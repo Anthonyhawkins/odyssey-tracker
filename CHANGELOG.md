@@ -14,6 +14,10 @@ User-facing changes to Odysseus Tracker are recorded here, newest first. Add upc
 - Documented ten proposed single-user enhancements in `docs/potential-features.md`, with initial scope, safeguards, and priorities.
 - Export PDF through the browser print dialog: a separate expanded quest map with unclipped parallel groups, printable links, and a full notes/progress-log appendix, preserving live and saved state.
 
+### Changed
+
+- Planning cards now have a dotted top border in every density mode and PDF export, retaining questline color and border thickness.
+
 ## 0.1.0 — 2026-10-12
 
 Initial version.

@@ -100,6 +100,7 @@ Reduce spacing and type size with density. All modes retain access to the full e
 
 - Support title, short description/requirement, category, delay estimate, and card state.
 - Provide Planning, Ready, In Progress, In Review, and Complete states; retain In Progress as the creation default. Only Complete sets `done` and completion history.
+- Planning cards use a dotted top border in all three density modes, retaining their questline color and existing border thickness; other borders remain unchanged.
 - Preserve legacy `undefined` values and their dotted card outline. Existing Undefined cards offer an Undefined (legacy) editor option until explicitly changed; new cards use the five current states. Do not silently rewrite saved lifecycle values on load or unrelated edits.
 - Derive blocked display from the explicit dependency, while preserving the underlying card state.
 - Show date and time for applicable Created, Updated, Completed, Merged, and Abandoned events, using consistent local formatting.
